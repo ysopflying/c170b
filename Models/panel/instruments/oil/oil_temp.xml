@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+
+ <name>oil_temp</name>
+ <path>oil_temp.ac</path>
+
+<animation> 
+  <type>rotate</type>
+  <object-name>old_needle</object-name>
+  <property>engines/engine[0]/oil-temperature-degf</property>
+  <interpolation>
+		<entry><ind>   0</ind><dep>  -36</dep></entry>
+		<entry><ind> 100</ind><dep>  -36</dep></entry>
+		<entry><ind> 150</ind><dep>-23.5</dep></entry>
+		<entry><ind> 200</ind><dep>   -3</dep></entry>
+		<entry><ind> 220</ind><dep>   12</dep></entry>
+		<entry><ind> 240</ind><dep>   27</dep></entry>
+		<entry><ind> 250</ind><dep>   36</dep></entry>
+  </interpolation>
+  <axis> 
+   <x>-1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+  <center>
+   <x-m>0</x-m>
+   <y-m>0</y-m>
+   <z-m>0</z-m>  
+  </center>
+ </animation>         
+
+</PropertyList>
+
+

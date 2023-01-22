@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+
+ <name>oil_press</name>
+ <path>oil_press.ac</path>
+
+<animation> 
+  <type>rotate</type>
+  <object-name>old_needle</object-name>
+  <property>engines/engine[0]/oil-pressure-psi</property>
+  <interpolation>
+		<entry><ind>   0</ind><dep> -34</dep></entry>
+		<entry><ind>  20</ind><dep> -16</dep></entry>
+		<entry><ind>  40</ind><dep>   5</dep></entry>
+		<entry><ind>  60</ind><dep>20.5</dep></entry>
+		<entry><ind>  80</ind><dep>  34</dep></entry>
+  </interpolation>
+  <axis> 
+   <x>-1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+  <center>
+   <x-m>0</x-m>
+   <y-m>0</y-m>
+   <z-m>0</z-m>  
+  </center>
+ </animation>         
+
+</PropertyList>
+
+

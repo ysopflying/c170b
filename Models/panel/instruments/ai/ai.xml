@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <path>AI.ac</path>
+
+ <animation>
+  <name>Pitch</name>
+  <type>translate</type>
+  <object-name>Pitch</object-name>
+  <property>instrumentation/attitude-indicator/indicated-pitch-deg</property>
+  <factor>-0.0007</factor>
+  <min-m>-0.01575</min-m>
+  <max-m>0.01575</max-m>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <name>Horizon Offset</name>
+  <type>translate</type>
+  <object-name>Pitch</object-name>
+  <property>instrumentation/attitude-indicator/horizon-offset-deg</property>
+  <factor>-0.0007</factor>
+  <min-m>-0.01575</min-m>
+  <max-m>0.01575</max-m>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>Roll</object-name>
+    <property>instrumentation/attitude-indicator/indicated-roll-deg</property>
+  <factor>-1</factor>
+  <axis>
+   <x>-1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>Pitch</object-name>
+    <property>instrumentation/attitude-indicator/indicated-roll-deg</property>
+  <factor>-0.5</factor>
+  <axis>
+   <x>-1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ 
+<animation>
+ <type>knob</type>
+ <object-name>AdjustKnob</object-name>
+  
+ <action>
+  <repeatable>true</repeatable>
+  <binding>
+   <command>property-adjust</command>
+   <property>instrumentation/attitude-indicator/horizon-offset-deg</property>
+   <factor type="double">0.5</factor>
+  </binding>          
+ </action>
+ 
+ <property>instrumentation/attitude-indicator/horizon-offset-deg</property>
+ <factor>-8</factor>
+ 
+ <axis>
+  <x>1</x>
+  <y>0</y>
+  <z>0</z>
+ </axis>
+ 
+ <center>
+     <x-m>0.0</x-m>
+     <y-m>0.0</y-m>
+     <z-m>-0.0353</z-m>
+ </center>
+ 
+ <hovered>
+  <binding>
+    <command>set-tooltip</command>
+    <tooltip-id>ai-horizon-offset</tooltip-id>
+    <label>Horizon Offset: %2d</label>
+    <property>instrumentation/attitude-indicator/horizon-offset-deg</property>
+ </binding>
+ </hovered>
+</animation>
+
+</PropertyList>
+
+

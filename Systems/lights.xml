@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList>
+
+    <logic>
+        <name>Lighting Landing On/Off</name>
+        <input>
+            <and>
+                <less-than>
+                    <property>/systems/c170b/electrical/outputs/landing-light</property>
+                    <value>14.5</value>
+                </less-than>
+                <greater-than>
+                    <property>/systems/c170b/electrical/outputs/landing-light</property>
+                    <value>10.0</value>
+                </greater-than>
+                <property>/controls/lighting/landing-lights</property>
+            </and>
+        </input>
+        <output>
+            <property>/sim/model/c170b/lighting/landing</property>
+        </output>
+    </logic>
+
+    <logic>
+        <name>Lighting Taxi On/Off</name>
+        <input>
+            <and>
+                <less-than>
+                    <property>/systems/c170b/electrical/outputs/taxi-light</property>
+                    <value>14.5</value>
+                </less-than>
+                <greater-than>
+                    <property>/systems/c170b/electrical/outputs/taxi-light</property>
+                    <value>10.0</value>
+                </greater-than>
+                <property>/controls/lighting/taxi-light</property>
+            </and>
+        </input>
+        <output>
+            <property>/sim/model/c170b/lighting/taxi</property>
+        </output>
+    </logic>
+
+<!--
+    <logic>
+        <name>ALS Lighting Landing</name>
+        <input>
+            <and>
+                <property>/sim/current-view/internal</property>
+                <property>/sim/model/c170b/lighting/landing</property>
+            </and>
+        </input>
+        <output>
+            <property>/sim/rendering/als-secondary-lights/use-landing-light</property>
+        </output>
+    </logic>
+
+    <logic>
+        <name>ALS Lighting Taxi</name>
+        <input>
+            <and>
+                <property>/sim/current-view/internal</property>
+                <property>/sim/model/c170b/lighting/taxi</property>
+            </and>
+        </input>
+        <output>
+            <property>/sim/rendering/als-secondary-lights/use-alt-landing-light</property>
+        </output>
+    </logic>
+
+    <logic>
+        <name>ALS Lighting Exterior Landing</name>
+        <input>
+            <and>
+                <not>
+                    <property>/sim/current-view/internal</property>
+                </not>
+                <property>/sim/model/c170b/lighting/landing</property>
+            </and>
+        </input>
+        <output>
+            <property>/sim/rendering/als-secondary-lights/use-landing-light-ext</property>
+        </output>
+    </logic>
+
+    <logic>
+        <name>ALS Lighting Exterior Taxi</name>
+        <input>
+            <and>
+                <not>
+                    <property>/sim/current-view/internal</property>
+                </not>
+                <property>/sim/model/c170b/lighting/taxi</property>
+            </and>
+        </input>
+        <output>
+            <property>/sim/rendering/als-secondary-lights/use-taxi-light-ext</property>
+        </output>
+    </logic> -->
+
+
+    <filter>
+        <name>Nav Lights</name>
+        <type>gain</type>
+        <input>
+            <condition>
+                <greater-than> 
+                    <property>/systems/c170b/electrical/outputs/nav-lights</property>
+                    <value>10</value>
+                </greater-than>
+            </condition>
+            <property>controls/lighting/nav-lights-switch</property>
+        </input>
+        <output>
+            <property>controls/lighting/nav-lights</property>
+        </output>
+    </filter>
+
+    <filter>
+        <name>Beacon</name>
+        <type>gain</type>
+        <input>
+            <condition>
+                <greater-than> 
+                    <property>/systems/c170b/electrical/outputs/beacon-light</property>
+                    <value>11</value>
+                </greater-than>
+            </condition>
+            <property>controls/lighting/beacon-switch</property>
+        </input>
+        <output>
+            <property>controls/lighting/beacon</property>
+        </output>
+    </filter>
+	<filter>
+		<type>noise-spike</type>
+		<input>
+			<expression>
+				<product>
+					<property>/controls/lighting/beacon</property>
+					<value>1</value>
+				</product>
+			</expression>
+		</input>
+		<output>/sim/model/lights/beacon/brightness-norm</output>
+		<max-rate-of-change>3</max-rate-of-change>
+	</filter>
+	
+	<filter>
+		<type>gain</type>
+		<input>
+			<expression>
+				<mod>
+					<sum>
+						<property>/sim/model/lights/beacon/rotation-deg</property>
+						<product>
+							<property>/sim/model/lights/beacon/brightness-norm</property>
+							<value>360</value>
+							<property>/sim/time/delta-sec</property>
+						</product>
+					</sum>
+					<value>360</value>
+				</mod>
+			</expression>
+		</input>
+		<output>/sim/model/lights/beacon/rotation-deg</output>
+	</filter>
+	
+	<filter>
+		<type>gain</type>
+		<input>
+			<expression>
+				<cos>
+					<deg2rad>
+						<property>/sim/model/lights/beacon/rotation-deg</property>
+					</deg2rad>
+				</cos>
+			</expression>
+		</input>
+		<output>/sim/model/lights/beacon/pointing-x</output>
+	</filter>
+	
+	<filter>
+		<type>gain</type>
+		<input>
+			<expression>
+				<sin>
+					<deg2rad>
+						<property>/sim/model/lights/beacon/rotation-deg</property>
+					</deg2rad>
+				</sin>
+			</expression>
+		</input>
+		<output>/sim/model/lights/beacon/pointing-y</output>
+	</filter>
+
+    <filter>
+        <name>Strobe</name>
+        <type>gain</type>
+        <input>
+            <condition>
+                <greater-than> 
+                    <property>/systems/c170b/electrical/outputs/strobe-lights</property>
+                    <value>10</value>
+                </greater-than>
+            </condition>
+            <property>controls/lighting/strobe-switch</property>
+        </input>
+        <output>
+            <property>controls/lighting/strobe</property>
+        </output>
+    </filter>
+
+    <filter>
+        <name>Radio_lights</name>
+        <type>gain</type>
+        <input>
+            <condition>
+                <greater-than> 
+                    <property>/systems/c170b/electrical/outputs/instrument-lights</property>
+                    <value>10</value>
+                </greater-than>
+            </condition>
+            <property>controls/lighting/radio-norm</property>
+        </input>
+        <output>
+            <property>/sim/model/c170b/lighting/radio</property>
+        </output>
+    </filter>
+
+    <filter>
+        <name>instrument_lights</name>
+        <type>gain</type>
+        <input>
+            <condition>
+                <greater-than> 
+                    <property>/systems/c170b/electrical/outputs/instrument-lights</property>
+                    <value>10</value>
+                </greater-than>
+            </condition>
+            <property>controls/lighting/instruments-norm</property>
+        </input>
+        <output>
+            <property>/sim/model/c170b/lighting/instruments</property>
+        </output>
+    </filter>
+
+</PropertyList>

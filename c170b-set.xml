@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList>
+
+    <sim>
+        <description>Cessna 170B (1955)</description>
+         <long-description>The Cessna 170 is an American light, single-engined, general aviation aircraft produced by the Cessna Aircraft Company between 1948 and 1956.</long-description>
+   
+         <es>
+            <long-description>El Cessna 170 es un avion monomotor Americano, de ala alta. fabricado por Cessna Aircraft Company entre 1948 y 1956.</long-description>
+        </es>
+
+        <tags>
+            <tag>ga</tag>
+            <tag>cessna</tag>
+            <tag>piston</tag>
+            <tag>single-engine</tag>
+            <tag>fixed-gear</tag>
+        </tags>
+  
+        <author>awall86 (Adrian Fernandez Gomez). A special thanks to Octal450 (Josh Davidson) for his excelent Aircraft Config Center Utility</author>
+        <status>alpha</status>
+        <aircraft-version>2023.1.1A</aircraft-version>
+        <minimum-fg-version>2020.4.0A</minimum-fg-version>
+
+  
+        <rating>
+            <FDM type="int">3</FDM>
+            <systems type="int">2</systems>
+            <model type="int">4</model>
+            <cockpit type="int">4</cockpit>
+        </rating>
+
+        <flight-model archive="y">jsb</flight-model>
+        <aero archive="y">c170b</aero>
+	
+		<model>
+            <path archive="y">Aircraft/c170b/Models/c170b.xml</path>
+		
+			<c170b>
+				<mw_fairing type="bool">true</mw_fairing>
+			</c170b>
+
+            <crew>
+                <pilot n="0">
+                    <pose include="Models/Human/pose-pilot.xml"/>
+                    <character>0</character>
+                    <outfit>0</outfit>
+                    <equipment>0</equipment>
+                </pilot>
+                <pilot n="1">
+                    <pose include="Models/Human/pose-copilot.xml"/>
+                    <character>0</character>
+                    <outfit>0</outfit>
+                    <equipment>0</equipment>
+                </pilot>
+            </crew>
+
+            <!-- Human models persistent menu choice -->
+            <occupants type="bool">true</occupants>
+
+
+		</model>			
+
+        <gui n="0" include="gui/c170b-gui.xml"/>
+
+        <menubar include="gui/dialogs/c170b-menu.xml"/>
+		
+        <!-- Splash screens. One is randomly chosen when FlightGear starts -->
+        <previews>
+            <preview>
+                <type>exterior</type>
+                <path>Previews/c170b-preview0.jpg</path>
+                <splash type="bool">true</splash>
+            </preview>
+            <preview>
+                <type>interior</type>
+                <path>Previews/c170b-preview1.jpg</path>
+                <splash type="bool">true</splash>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <path>Previews/c170b-preview2.jpg</path>
+                <splash type="bool">true</splash>
+            </preview>
+        </previews>
+
+        <systems>           
+            <property-rule n="100">
+                <path archive="y">Aircraft/c170b/Systems/engine.xml</path>
+            </property-rule>
+            <property-rule n="101">
+                <path archive="y">Aircraft/c170b/Systems/lights.xml</path>
+            </property-rule>            
+	</systems>
+
+    <sound>
+         <path archive="y">c170b-sound.xml</path>
+    </sound>
+		
+    <!-- Position the pilot viewpoint and angle -->
+    <view>
+        <internal type="bool" archive="y">true</internal>
+        <config>
+            <x-offset-m archive="y" type="double">-0.21</x-offset-m>
+            <y-offset-m archive="y" type="double">0.628</y-offset-m>
+            <z-offset-m archive="y" type="double">2.76</z-offset-m>
+            <pitch-offset-deg type="double">-12</pitch-offset-deg>
+            <default-field-of-view-deg>73.6</default-field-of-view-deg>
+        </config>
+    </view>
+	
+	</sim>
+
+    <fdm>
+        <jsbsim>
+            <propulsion>
+                <tank n="1">
+                    <collector-valve type="int">1</collector-valve>
+                </tank>
+                <tank n="2">
+                    <collector-valve type="int">1</collector-valve>
+                </tank>
+            </propulsion>
+        </jsbsim>
+    </fdm>
+
+    <payload>
+        <weight>
+            <name type="string">Pilot</name>
+            <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[0]"/>
+            <min-lb type="double">0.0</min-lb>
+            <max-lb type="double">300.0</max-lb>
+        </weight>
+        <weight>
+            <name type="string">Co-Pilot</name>
+            <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[1]"/>
+            <min-lb type="double">0.0</min-lb>
+            <max-lb type="double">300.0</max-lb>
+        </weight>
+        <weight>
+            <name type="string">Baggage</name>
+            <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[2]"/>
+            <min-lb type="double">0.0</min-lb>
+            <max-lb type="double">120.0</max-lb> <!-- WARNING: Max baggage "by the book" is 120lbs or less! -->
+        </weight>
+    </payload>
+
+    <controls>
+        <engines>
+            <engine n="0">
+                <magnetos type="int">0</magnetos>
+                <master-bat type="bool">false</master-bat>
+                <master-alt type="bool">true</master-alt>
+                <mixture type="double">0</mixture>
+            </engine>   
+        </engines>
+
+        <gear>
+            <brake-parking type="bool">true</brake-parking>
+        </gear>
+
+		<switches>
+            <master-bat type="bool">false</master-bat>
+            <master-alt type="bool">true</master-alt>
+            <magnetos type="double">0</magnetos>
+		</switches>
+
+        <lighting>
+            <landing-lights type="bool">false</landing-lights>
+            <taxi-light type="bool">false</taxi-light>
+            <strobe type="bool">false</strobe>
+            <beacon type="bool">false</beacon>
+            <nav-lights type="bool">false</nav-lights>
+            <nav-lights-switch type="bool">false</nav-lights-switch>
+        </lighting>
+
+		<circuit-breakers>
+			<fuel_ind type="bool">true</fuel_ind>
+			<beacon type="bool">true</beacon>
+			<strobe_lt type="bool">true</strobe_lt>
+			<landing_lt type="bool">true</landing_lt>
+			<flaps type="bool">true</flaps>
+			<instr_lt type="bool">true</instr_lt>
+			<nav_lt type="bool">true</nav_lt>
+			<radio1 type="bool">true</radio1>
+		</circuit-breakers>
+    </controls>
+
+    <consumables>
+        <fuel>
+            <tank n="0">
+                <name type="string">carb Bowl</name>
+            </tank>
+            
+            <tank n="1">
+                <name type="string">Left Wing</name>
+                <capacity-gal_us type="double">21.0</capacity-gal_us>
+                <unusable-gal_us type="double">0.75</unusable-gal_us>
+                <level-gal_us type="double">18</level-gal_us>
+            </tank>
+
+           <tank n="2">
+               <name type="string">Right Wing</name>
+               <capacity-gal_us type="double">21.0</capacity-gal_us>
+               <unusable-gal_us type="double">0.75</unusable-gal_us>
+               <level-gal_us type="double">18</level-gal_us>
+           </tank>
+        </fuel>
+    </consumables>
+
+    <nasal>
+		<c170b>
+            <file>Nasal/c170b.nas</file>
+        </c170b>
+
+        <electrical>
+            <file>Nasal/electric_system.nas</file>
+        </electrical>
+
+		<acconfig>
+			<file>Aircraft/c170b/AircraftConfig/acconfig.nas</file>
+		</acconfig>	
+    </nasal>
+
+    <systems>
+        <c170b>
+			<electrical>
+				<battery-status type="double">100.0</battery-status>
+			</electrical>
+		</c170b>
+    </systems>
+
+    <instrumentation>
+        <transponder>
+
+            <ident_status type="int">0</ident_status>
+            <ident_light type="double">0.0</ident_light>
+            <ident_light_status type="int">0</ident_light_status>
+            
+           <inputs>
+                <knob-mode type="int">0</knob-mode>
+            </inputs>
+ 
+		</transponder>
+    </instrumentation>
+	
+</PropertyList>
+  

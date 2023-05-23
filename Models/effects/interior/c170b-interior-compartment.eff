@@ -17,7 +17,7 @@
         </texture>
 <!--        <light-filter-one type="vec3d">0.3 0.22 0.1</light-filter-one> -->
 <!--        <light-filter-one type="vec3d">0.01 0.0 0.08</light-filter-one> -->
-        <light-filter-one type="vec3d">0.2 0.0 0.00</light-filter-one>
+        <light-filter-one type="vec3d">1.0 0.0 0.00</light-filter-one>
         <light-radius type="float">90</light-radius>
     </parameters>
 </PropertyList>

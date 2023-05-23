@@ -51,4 +51,41 @@
         </output>
     </filter>
 
+   <logic>
+        <name>fuel tank 1 On/Off</name>
+        <input>
+            <and>
+                <less-than>
+                    <property>controls/fuel/fuel-selector</property>
+                    <value>3</value>
+                </less-than>
+                <greater-than>
+                    <property>controls/fuel/fuel-selector</property>
+                    <value>0</value>
+                </greater-than>
+            </and>
+        </input>
+        <output>
+            <property>/fdm/jsbsim/propulsion/tank[1]/collector-valve</property>
+        </output>
+    </logic>
+   <logic>
+        <name>fuel tank 2 On/Off</name>
+        <input>
+            <and>
+                <less-than>
+                    <property>controls/fuel/fuel-selector</property>
+                    <value>4</value>
+                </less-than>
+                <greater-than>
+                    <property>controls/fuel/fuel-selector</property>
+                    <value>1</value>
+                </greater-than>
+            </and>
+        </input>
+        <output>
+            <property>/fdm/jsbsim/propulsion/tank[2]/collector-valve</property>
+        </output>
+    </logic>
+	
 </PropertyList>

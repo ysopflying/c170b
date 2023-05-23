@@ -2,7 +2,7 @@
 
 <PropertyList>
 
-    <logic>
+   <logic>
         <name>Lighting Landing On/Off</name>
         <input>
             <and>
@@ -14,7 +14,10 @@
                     <property>/systems/c170b/electrical/outputs/landing-light</property>
                     <value>10.0</value>
                 </greater-than>
-                <property>/controls/lighting/landing-lights</property>
+				<greater-than>
+					<property>/controls/lighting/taxi-landing-switch</property>
+                    <value>1.0</value>
+                </greater-than>
             </and>
         </input>
         <output>
@@ -34,7 +37,10 @@
                     <property>/systems/c170b/electrical/outputs/taxi-light</property>
                     <value>10.0</value>
                 </greater-than>
-                <property>/controls/lighting/taxi-light</property>
+				<greater-than>
+					<property>/controls/lighting/taxi-landing-switch</property>
+                    <value>0.0</value>
+                </greater-than>
             </and>
         </input>
         <output>
@@ -42,7 +48,7 @@
         </output>
     </logic>
 
-<!--
+
     <logic>
         <name>ALS Lighting Landing</name>
         <input>
@@ -52,7 +58,7 @@
             </and>
         </input>
         <output>
-            <property>/sim/rendering/als-secondary-lights/use-landing-light</property>
+            <property>/sim/rendering/als-secondary-lights/use-landing-light-int</property>
         </output>
     </logic>
 
@@ -65,7 +71,7 @@
             </and>
         </input>
         <output>
-            <property>/sim/rendering/als-secondary-lights/use-alt-landing-light</property>
+            <property>/sim/rendering/als-secondary-lights/use-taxi-light-int</property>
         </output>
     </logic>
 
@@ -97,8 +103,7 @@
         <output>
             <property>/sim/rendering/als-secondary-lights/use-taxi-light-ext</property>
         </output>
-    </logic> -->
-
+    </logic>
 
     <filter>
         <name>Nav Lights</name>
@@ -222,28 +227,12 @@
                     <value>10</value>
                 </greater-than>
             </condition>
-            <property>controls/lighting/radio-norm</property>
+            <property>controls/lighting/radio-switch</property>
         </input>
         <output>
             <property>/sim/model/c170b/lighting/radio</property>
         </output>
     </filter>
 
-    <filter>
-        <name>instrument_lights</name>
-        <type>gain</type>
-        <input>
-            <condition>
-                <greater-than> 
-                    <property>/systems/c170b/electrical/outputs/instrument-lights</property>
-                    <value>10</value>
-                </greater-than>
-            </condition>
-            <property>controls/lighting/instruments-norm</property>
-        </input>
-        <output>
-            <property>/sim/model/c170b/lighting/instruments</property>
-        </output>
-    </filter>
 
 </PropertyList>

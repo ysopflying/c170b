@@ -1,3 +1,8 @@
+# =============================== DEFINITIONS ===========================================
+# set the update period
+
+var UPDATE_PERIOD = 0.3;
+
 ##########################################
 # Autostart
 ##########################################
@@ -88,7 +93,6 @@ var ident_light_timer = maketimer(0.1, func {
 });
 ident_light_timer.start();
 
-
 ##########################################
 # Click Sounds
 ##########################################
@@ -108,18 +112,58 @@ var click = func (name, timeout=0.1, delay=0) {
     }, delay);
 };
 
+
+var flapsDown = func(step) {
+    if(step == 0) return;
+    if(props.globals.getNode("/sim/flaps") != nil) {
+        stepProps("/controls/flight/flaps", "/sim/flaps", step);
+        return;
+    }
+    # Hard-coded flaps movement in 4 equal steps:
+    var val = 0.25 * step + getprop("/controls/flight/flaps");
+    setprop("/controls/flight/flaps", val > 1 ? 1 : val < 0 ? 0 : val);
+}
+
+
+# ========== primer stuff ======================
+
+# Toggles the state of the primer
+var pumpPrimer = func {
+    var push = getprop("/controls/engines/engine/primer-lever") or 0;
+
+    if (push) {
+        var pump = getprop("/controls/engines/engine/primer") or 0;
+        setprop("/controls/engines/engine/primer", pump + 1);
+        setprop("/controls/engines/engine/primer-lever", 0);
+    }
+    else {
+        setprop("/controls/engines/engine/primer-lever", 1);
+    }
+};
+
+# Mixture will be calculated using the primer during 5 seconds AFTER the pilot used the starter
+# This prevents the engine to start just after releasing the starter: the propeller will be running
+# thanks to the electric starter, but carburator has not yet enough mixture
+var primerTimer = maketimer(5, func {
+    setprop("/controls/engines/engine/use-primer", 0);
+    # Reset the number of times the pilot used the primer only AFTER using the starter
+    setprop("/controls/engines/engine/primer", 0);
+    print("Primer reset to 0");
+    primerTimer.stop();
+});
+
 setlistener("/pax/co-pilot/present", update_pax, 0, 0);
 setlistener("/pax/left-passenger/present", update_pax, 0, 0);
 setlistener("/pax/right-passenger/present", update_pax, 0, 0);
 setlistener("/pax/pilot/present", update_pax, 0, 0);
 update_pax();
 
-    setlistener("/engines/engine/running", func (node) {
-        var autostart = getprop("/engines/engine/auto-start");
-        var cranking  = getprop("/engines/engine/cranking");
-        if (autostart and cranking and node.getBoolValue()) {
-            setprop("/controls/engines/engine/starter", 0);
-            setprop("/engines/engine/auto-start", 0);
-        }
-    }, 0, 0);
+setlistener("/engines/engine/running", func (node) {
+    var autostart = getprop("/engines/engine/auto-start");
+    var cranking  = getprop("/engines/engine/cranking");
+    if (autostart and cranking and node.getBoolValue()) {
+        setprop("/controls/engines/engine/starter", 0);
+        setprop("/engines/engine/auto-start", 0);
+    }
+}, 0, 0);
 

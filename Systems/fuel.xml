@@ -27,7 +27,7 @@ Negative Gs (<-0.5g) cuts the supply to the collector tanks -->
       </test>
       <output>propulsion/tank[2]/external-flow-rate-pps</output>
     </switch>
-
+	
     <summer>
       <input>-propulsion/tank[1]/external-flow-rate-pps</input>
       <input>-propulsion/tank[2]/external-flow-rate-pps</input>

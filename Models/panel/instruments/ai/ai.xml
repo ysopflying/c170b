@@ -4,10 +4,74 @@
 
  <path>AI.ac</path>
 
+    <effect>
+        <inherits-from>Aircraft/c170b/Models/Effects/interior/c170b-interior-compartment-1</inherits-from>
+        <object-name>Pitch_UV</object-name>
+        <object-name>Roll_UV</object-name>
+        <object-name>Aircraft</object-name>
+        <object-name>Mark1</object-name>
+        <object-name>Mark2</object-name>
+    </effect>
+
+    <effect>
+        <inherits-from>Aircraft/c170b/Models/Effects/interior/c170b-interior-compartment</inherits-from>
+        <object-name>Pitch</object-name>
+        <object-name>Roll</object-name>
+        <object-name>AdjustKnob</object-name>
+        <object-name>Bracket</object-name>
+        <object-name>Case</object-name>
+        <object-name>Bezel</object-name>
+    </effect>
+
+	<animation>
+		<type>select</type>
+		<object-name>Pitch</object-name>
+		<condition>
+			<equals>
+				<property>sim/rendering/als-secondary-lights/use-flashlight</property>
+				<value>0</value>
+			</equals>
+		</condition>
+	</animation>
+
+	<animation>
+		<type>select</type>
+		<object-name>Pitch_UV</object-name>
+		<condition>
+			<equals>
+				<property>sim/rendering/als-secondary-lights/use-flashlight</property>
+				<value>1</value>
+			</equals>
+		</condition>
+	</animation>
+
+	<animation>
+		<type>select</type>
+		<object-name>Roll</object-name>
+		<condition>
+			<equals>
+				<property>sim/rendering/als-secondary-lights/use-flashlight</property>
+				<value>0</value>
+			</equals>
+		</condition>
+	</animation>
+
+	<animation>
+		<type>select</type>
+		<object-name>Roll_UV</object-name>
+		<condition>
+			<equals>
+				<property>sim/rendering/als-secondary-lights/use-flashlight</property>
+				<value>1</value>
+			</equals>
+		</condition>
+	</animation>
+	
  <animation>
   <name>Pitch</name>
   <type>translate</type>
   <object-name>Pitch</object-name>
+  <object-name>Pitch_UV</object-name>
   <property>instrumentation/attitude-indicator/indicated-pitch-deg</property>
   <factor>-0.0007</factor>
   <min-m>-0.01575</min-m>
@@ -23,6 +87,7 @@
   <name>Horizon Offset</name>
   <type>translate</type>
   <object-name>Pitch</object-name>
+  <object-name>Pitch_UV</object-name>
   <property>instrumentation/attitude-indicator/horizon-offset-deg</property>
   <factor>-0.0007</factor>
   <min-m>-0.01575</min-m>
@@ -37,6 +102,7 @@
  <animation>
   <type>rotate</type>
   <object-name>Roll</object-name>
+  <object-name>Roll_UV</object-name>
     <property>instrumentation/attitude-indicator/indicated-roll-deg</property>
   <factor>-1</factor>
   <axis>
@@ -49,6 +115,7 @@
  <animation>
   <type>rotate</type>
   <object-name>Pitch</object-name>
+  <object-name>Pitch_UV</object-name>
     <property>instrumentation/attitude-indicator/indicated-roll-deg</property>
   <factor>-0.5</factor>
   <axis>

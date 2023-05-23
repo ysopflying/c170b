@@ -3,8 +3,8 @@
 
    <path>rt359a.ac</path>
 
-<!--    <effect>
-        <inherits-from>Aircraft/c152/Models/Effects/interior/c152-interior-compartment</inherits-from>
+    <effect>
+        <inherits-from>Aircraft/c170b/Models/Effects/interior/c170b-interior-compartment</inherits-from>
             <object-name>Digit_1000</object-name>
             <object-name>Digit_100</object-name>
             <object-name>Digit_10</object-name>
@@ -15,6 +15,10 @@
             <object-name>Knob_Digit_1</object-name>
             <object-name>knobmode</object-name>
             <object-name>reply</object-name>
+            <object-name>Chassis</object-name>			
+            <object-name>Chassis-1</object-name>
+            <object-name>id_btn</object-name>	
+            <object-name>test_btn</object-name>				
     </effect>
 
     <animation>
@@ -24,12 +28,12 @@
             <object-name>Digit_10</object-name>
             <object-name>Digit_1</object-name>
         <emission>
-            <red>0.98</red>
-            <green>0.51</green>
-            <blue>0.0</blue>
-            <factor-prop>/sim/model/c152/lighting/radio</factor-prop>
+            <red>1.00</red>
+            <green>0.83</green>
+            <blue>0.55</blue>
+            <factor-prop>/sim/model/c170b/lighting/radio</factor-prop>
         </emission>
-    </animation> -->
+    </animation>
 
 <!--    Active Frequency   -->
 

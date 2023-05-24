@@ -25,7 +25,8 @@ var autostart = func (msg=1) {
     setprop("/controls/flight/elevator-trim", 0.0);
     setprop("/controls/switches/master-bat", 1);
     setprop("/controls/switches/master-alt", 1);
-
+    setprop("/controls/fuel/fuel-selector", 3);
+	
     # Setting lights
     setprop("/controls/lighting/nav-lights-switch", 1);
     setprop("/controls/lighting/strobe-switch", 1);

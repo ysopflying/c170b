@@ -203,11 +203,11 @@
 
 	<propulsion>
 
-		<engine file="o-300-a">
+		<engine file="O-300-A">
 
 			<feed>0</feed>
     
-			<thruster file="hz-c2yr-1bf">
+			<thruster file="HZ-C2YR-1BF">
 				<sense> 1 </sense>
 				<location unit="IN">
 					<x>  13.00 </x>

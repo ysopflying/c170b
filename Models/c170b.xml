@@ -249,7 +249,7 @@
 
 <!-- AI -->
 <model>
-   <path>Aircraft/c170b/models/panel/instruments/ai/ai.xml</path>
+   <path>Aircraft/c170b/Models/Panel/Instruments/ai/ai.xml</path>
    <offsets>
       <x-m>1.926</x-m>
       <y-m>-0.250 </y-m>
@@ -260,7 +260,7 @@
 
 <!-- ASI -->
 <model>
-   <path>Aircraft/c170b/models/panel/instruments/asi/asi.xml</path>
+   <path>Aircraft/c170b/Models/Panel/Instruments/asi/asi.xml</path>
    <offsets>
       <x-m>1.925</x-m>
       <y-m>-0.3597 </y-m>
@@ -271,7 +271,7 @@
 
 <!-- ALT -->
 <model>
-   <path>Aircraft/c170b/models/panel/instruments/alt/alt.xml</path>
+   <path>Aircraft/c170b/Models/Panel/Instruments/alt/alt.xml</path>
    <offsets>
       <x-m>1.916</x-m>
       <y-m>-0.117 </y-m>
@@ -282,7 +282,7 @@
 
 <!-- TC -->
 <model>
-   <path>Aircraft/c170b/models/panel/instruments/tc/tc.xml</path>
+   <path>Aircraft/c170b/Models/Panel/Instruments/tc/tc.xml</path>
    <offsets>
 	  <x-m>1.9400</x-m>
       <y-m>-0.3682 </y-m>
@@ -293,7 +293,7 @@
 
 <!-- DG -->
 <model>
-   <path>Aircraft/c170b/models/panel/instruments/hi/hi.xml</path>
+   <path>Aircraft/c170b/Models/Panel/Instruments/hi/hi.xml</path>
    <offsets>
       <x-m>1.9356</x-m>
       <y-m>-0.0709 </y-m>
@@ -304,7 +304,7 @@
 
 <!-- vsi -->
 <model>
-   <path>Aircraft/c170b/models/panel/instruments/vsi/vsi.xml</path>
+   <path>Aircraft/c170b/Models/Panel/Instruments/vsi/vsi.xml</path>
    <offsets>
       <x-m>1.9303</x-m>
       <y-m>-0.4604 </y-m>
@@ -315,7 +315,7 @@
 
 <!-- RPM -->
 <model>
-   <path>Aircraft/c170b/models/panel/instruments/rpm/rpm.xml</path>
+   <path>Aircraft/c170b/Models/Panel/Instruments/rpm/rpm.xml</path>
    <offsets>
       <x-m>1.9225</x-m>
       <y-m>0.2405 </y-m>
@@ -326,7 +326,7 @@
 
 <!-- VOR -->
 <model>
-   <path>Aircraft/c170b/models/panel/instruments/vor/vor.xml</path>
+   <path>Aircraft/c170b/Models/Panel/Instruments/vor/vor.xml</path>
    <offsets>
       <x-m>1.9184</x-m>
       <y-m>0.1169 </y-m>
@@ -337,7 +337,7 @@
 
 <!-- CLOCK -->
 <model>
-   <path>Aircraft/c170b/models/panel/instruments/clock/clock.xml</path>
+   <path>Aircraft/c170b/Models/Panel/Instruments/clock/clock.xml</path>
    <offsets>
       <x-m>1.9357</x-m>
       <y-m>-0.1713 </y-m>
@@ -348,7 +348,7 @@
 
 <!-- OIL PRESS -->
 <model>
-   <path>Aircraft/c170b/models/panel/instruments/oil/oil_press.xml</path>
+   <path>Aircraft/c170b/Models/Panel/Instruments/oil/oil_press.xml</path>
    <offsets>
       <x-m>1.9276</x-m>
       <y-m>0.3352 </y-m>
@@ -359,7 +359,7 @@
 
 <!-- OIL TEMP -->
 <model>
-   <path>Aircraft/c170b/models/panel/instruments/oil/oil_temp.xml</path>
+   <path>Aircraft/c170b/Models/Panel/Instruments/oil/oil_temp.xml</path>
    <offsets>
       <x-m>1.937</x-m>
       <y-m>0.3359 </y-m>
@@ -370,7 +370,7 @@
 
 <!-- AMMETER -->
 <model>
-   <path>Aircraft/c170b/models/panel/instruments/amps/amps.xml</path>
+   <path>Aircraft/c170b/Models/Panel/Instruments/amps/amps.xml</path>
    <offsets>
       <x-m>1.939</x-m>
       <y-m>0.251 </y-m>
@@ -381,7 +381,7 @@
 
 <!-- SUCTION -->
 <model>
-   <path>Aircraft/c170b/models/panel/instruments/vac/vac.xml</path>
+   <path>Aircraft/c170b/Models/Panel/Instruments/vac/vac.xml</path>
    <offsets>
       <x-m>1.932</x-m>
       <y-m>0.4115 </y-m>
@@ -392,7 +392,7 @@
 
 <!-- FUEL PRESS -->
 <model>
-   <path>Aircraft/c170b/models/panel/instruments/fuel/fuelp.xml</path>
+   <path>Aircraft/c170b/Models/Panel/Instruments/fuel/fuelp.xml</path>
    <offsets>
       <x-m>1.9395</x-m>
       <y-m>0.4125 </y-m>
@@ -403,7 +403,7 @@
 
 <!-- Stall Warning -->
 <model>
-   <path>Aircraft/c170b/models/panel/instruments/stallwarn/stallwarn.xml</path>
+   <path>Aircraft/c170b/Models/Panel/Instruments/stallwarn/stallwarn.xml</path>
    <offsets>
       <x-m>1.939</x-m>
       <y-m>-0.2548 </y-m>
@@ -414,7 +414,7 @@
 <!-- RT359A -->
 <model>
    <name>rt359a</name>
-   <path>Aircraft/c170b/models/panel/instruments/rt359a/rt359a.xml</path>
+   <path>Aircraft/c170b/Models/Panel/Instruments/rt359a/rt359a.xml</path>
    <offsets>
       <x-m>1.946</x-m>
       <y-m>-0.373 </y-m>
@@ -434,7 +434,7 @@
 <!-- kx170b -->
 <model>
    <name>kx170b</name>
-   <path>Aircraft/c170b/models/panel/instruments/kx170b/kx170b.xml</path>
+   <path>Aircraft/c170b/Models/Panel/Instruments/kx170b/kx170b.xml</path>
    <offsets>
       <x-m>1.9510</x-m>
       <y-m>-0.4082 </y-m>
@@ -446,7 +446,7 @@
 
 <!-- compass -->
 <model>
-   <path>Aircraft/c170b/models/panel/instruments/compass/compass.xml</path>
+   <path>Aircraft/c170b/Models/Panel/Instruments/compass/compass.xml</path>
    <offsets>
       <x-m>1.922</x-m>
       <y-m>0.003 </y-m>
@@ -458,7 +458,7 @@
 
 <!-- Garmin GPSMap 196 -->
 	<model> 
-		<path>Aircraft/c170b/models/panel/instruments/garmin196/garmin196.xml</path>
+		<path>Aircraft/c170b/Models/Panel/Instruments/garmin196/garmin196.xml</path>
 		<offsets> 
 			<x-m>1.91044</x-m>
 			<y-m>0.0</y-m>
@@ -468,7 +468,7 @@
 
 <!-- Left Fuel Tank Indicator -->
 	<model>
-		<path>Aircraft/c170b/models/panel/instruments/fuel/fuel_L.xml</path>
+		<path>Aircraft/c170b/Models/Panel/Instruments/fuel/fuel_L.xml</path>
 		<offsets>
 			<x-m>2.83167</x-m>
 			<y-m>-0.4979 </y-m>
@@ -479,7 +479,7 @@
 
 <!-- Right Fuel Tank Indicator -->
 	<model>
-		<path>Aircraft/c170b/models/panel/instruments/fuel/fuel_R.xml</path>
+		<path>Aircraft/c170b/Models/Panel/Instruments/fuel/fuel_R.xml</path>
 		<offsets>
 			<x-m>2.83167</x-m>
 			<y-m>0.4879 </y-m>
@@ -727,7 +727,7 @@
 
 <!-- Magneto Key -->
 	<model>
-		<path>Aircraft/c170b/models/panel/switches/magneto_switch.xml</path>
+		<path>Aircraft/c170b/Models/Panel/Switches/magneto_switch.xml</path>
 		<offsets>
 			<x-m>1.966</x-m>
 			<y-m>0.009 </y-m>
@@ -2044,7 +2044,7 @@
 
     <!-- Beacon light -->
 	<model>
-		<path>Aircraft/c170b/models/lights/beacon-light.xml</path>
+		<path>Aircraft/c170b/Models/Lights/beacon-light.xml</path>
 		<offsets>
 			<x-m>4.340</x-m>
 			<y-m>0.003 </y-m>

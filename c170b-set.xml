@@ -133,9 +133,6 @@
                 <name>FiltersOnly</name>
                 <path>Systems/instruments.xml</path>
             </property-rule>
-            <property-rule n="104">
-                <path archive="y">Aircraft/c170b/Systems/fuel.xml</path>
-            </property-rule>
 		</systems>
 
 		<sound>

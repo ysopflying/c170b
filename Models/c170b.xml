@@ -1826,6 +1826,34 @@
         </offsets>
     </model>
 
+<animation>
+	<type>select</type>
+	<object-name>Remove_before</object-name>
+	<condition>
+		<property>sim/model/c170b/pitot-cover</property>
+	</condition>
+ </animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>Remove_before</object-name>
+	<object-name>Cylinder.030</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>property-toggle</command>
+			<property>sim/model/c170b/pitot-cover</property>
+		</binding>
+	</action>
+	<hovered>
+		<binding>
+			<command>set-tooltip</command>
+			<tooltip-id>remove_pitot_cover</tooltip-id>
+			<label>Remove pitot cover</label>
+		</binding>
+	</hovered>
+</animation>
 
 <animation>
    <type>pick</type>

@@ -23,7 +23,7 @@
         <aircraft-version>2023.5.1A</aircraft-version>
         <minimum-fg-version>2020.3.17</minimum-fg-version>
  
-		<multiplay>
+        <multiplay>
             <generic>
                 <float n="0" alias="/sim/model/door-positions/rightDoor/position-norm-effective"/>
                 <float n="1" alias="/sim/model/door-positions/leftDoor/position-norm-effective"/>
@@ -42,39 +42,40 @@
 
         <flight-model archive="y">jsb</flight-model>
         <aero archive="y">c170b</aero>
-	
-		<model>
+
+        <model>
             <path archive="y">Aircraft/c170b/Models/c170b.xml</path>
 
             <!-- Default livery 
             <livery>
                 <name type="string">N086AS</name>
             </livery> -->
-		
-			<c170b>
-				<mw_fairing type="bool">true</mw_fairing>
+
+            <c170b>
+                <mw_fairing type="bool">true</mw_fairing>
+                <pitot-cover type="bool">true</pitot-cover>
                  <!-- Event sounds -->
-				<sound>
-					<click-master-bat type="bool">false</click-master-bat>
-					<click-master-alt type="bool">false</click-master-alt>
-					<click-landing-light type="bool">false</click-landing-light>
-					<click-taxi-light type="bool">false</click-taxi-light>
-					<click-nav-lights type="bool">false</click-nav-lights>
-					<click-strobe type="bool">false</click-strobe>
-					<click-beacon type="bool">false</click-beacon>
-					<click-pitot-heat type="bool">false</click-pitot-heat>
-					<click-magneto-forward type="bool">false</click-magneto-forward>
-					<click-magneto-back type="bool">false</click-magneto-back>
-					<click-flaps type="bool">false</click-flaps>
-					<click-kx170b-dial type="bool">false</click-kx170b-dial>
-				</sound>
+                <sound>
+                    <click-master-bat type="bool">false</click-master-bat>
+                    <click-master-alt type="bool">false</click-master-alt>
+                    <click-landing-light type="bool">false</click-landing-light>
+                    <click-taxi-light type="bool">false</click-taxi-light>
+                    <click-nav-lights type="bool">false</click-nav-lights>
+                    <click-strobe type="bool">false</click-strobe>
+                    <click-beacon type="bool">false</click-beacon>
+                    <click-pitot-heat type="bool">false</click-pitot-heat>
+                    <click-magneto-forward type="bool">false</click-magneto-forward>
+                    <click-magneto-back type="bool">false</click-magneto-back>
+                    <click-flaps type="bool">false</click-flaps>
+                    <click-kx170b-dial type="bool">false</click-kx170b-dial>
+                </sound>
 
                 <lighting>
                     <gps-norm type="float">0</gps-norm>
-					<taxi type="bool">false</taxi>
-					<landing type="bool">false</landing>
+                    <taxi type="bool">false</taxi>
+                    <landing type="bool">false</landing>
                 </lighting>
-			</c170b>
+            </c170b>
 
             <crew>
                 <pilot n="0">
@@ -94,12 +95,17 @@
             <!-- Human models persistent menu choice -->
             <occupants type="bool">true</occupants>
 
-		</model>			
+        </model>
+
+        <!-- Persistent data -->
+        <aircraft-data>
+            <path>/sim/model/c170b/pitot-cover</path>
+        </aircraft-data>
 
         <gui n="0" include="gui/c170b-gui.xml"/>
 
         <menubar include="gui/dialogs/c170b-menu.xml"/>
-		
+
         <!-- Splash screens. One is randomly chosen when FlightGear starts -->
         <previews>
             <preview>
@@ -129,102 +135,102 @@
             <property-rule n="102">
                 <path archive="y">Aircraft/c170b/Systems/pax.xml</path>
             </property-rule>
-			<property-rule n="103">
+            <property-rule n="103">
                 <name>FiltersOnly</name>
                 <path>Systems/instruments.xml</path>
             </property-rule>
-		</systems>
+        </systems>
 
-		<sound>
-			<path archive="y">c170b-sound.xml</path>
-		</sound>
-		
-		<!-- Position the pilot viewpoint and angle -->
-		<view>
-			<internal type="bool" archive="y">true</internal>
-			<config>
-				<x-offset-m archive="y" type="double">-0.16</x-offset-m>
-				<y-offset-m archive="y" type="double">0.600</y-offset-m>
-				<z-offset-m archive="y" type="double">2.66</z-offset-m>
-				<pitch-offset-deg type="double">-12</pitch-offset-deg>
-				<default-field-of-view-deg>75</default-field-of-view-deg>
-			</config>
-		</view>
-	
-		<view n="100">
-			<name>Fuel Selector</name>
-			<type>lookfrom</type>
-			<enabled type="bool">true</enabled>
-			<internal type="bool" archive="y">true</internal>
-			<config>
-				<from-model type="bool">true</from-model>
-				<x-offset-m archive="y">0.0</x-offset-m>
-				<y-offset-m archive="y">0.4</y-offset-m>
-				<z-offset-m archive="y">2.15</z-offset-m>
-				<default-field-of-view-deg type="double">84</default-field-of-view-deg>
-				<heading-offset-deg archive="y">0</heading-offset-deg>
-				<pitch-offset-deg archive="y">-80</pitch-offset-deg>
-				<roll-offset-deg archive="y">0</roll-offset-deg>
-			</config>
-		</view>
+        <sound>
+            <path archive="y">c170b-sound.xml</path>
+        </sound>
 
-		<view n="101">
-			<name>Lower Panel and Radio Stack</name>
-			<type>lookfrom</type>
-			<enabled type="bool">true</enabled>
-			<internal type="bool" archive="y">true</internal>
-			<config>
-				<from-model type="bool">true</from-model>
-				<x-offset-m archive="y">-0.2</x-offset-m>
-				<y-offset-m archive="y">0.08</y-offset-m>
-				<z-offset-m archive="y">2.30</z-offset-m>
-				<default-field-of-view-deg type="double">84</default-field-of-view-deg>
-				<heading-offset-deg archive="y">0</heading-offset-deg>
-				<pitch-offset-deg archive="y">0</pitch-offset-deg>
-				<roll-offset-deg archive="y">0</roll-offset-deg>
-			</config>
-		</view>
-	
-		<view n="102">
-			<name>Navigation and GPS</name>
-			<type>lookfrom</type>
-			<enabled type="bool">true</enabled>
-			<internal type="bool" archive="y">true</internal>
-			<config>
-				<from-model type="bool">true</from-model>
-				<x-offset-m archive="y">0.0</x-offset-m>
-				<y-offset-m archive="y">0.38</y-offset-m>
-				<z-offset-m archive="y">2.30</z-offset-m>
-				<default-field-of-view-deg type="double">60</default-field-of-view-deg>
-				<heading-offset-deg archive="y">0</heading-offset-deg>
-				<pitch-offset-deg archive="y">0</pitch-offset-deg>
-				<roll-offset-deg archive="y">0</roll-offset-deg>
-			</config>
-		</view>
+        <!-- Position the pilot viewpoint and angle -->
+        <view>
+            <internal type="bool" archive="y">true</internal>
+            <config>
+                <x-offset-m archive="y" type="double">-0.16</x-offset-m>
+                <y-offset-m archive="y" type="double">0.600</y-offset-m>
+                <z-offset-m archive="y" type="double">2.66</z-offset-m>
+                <pitch-offset-deg type="double">-12</pitch-offset-deg>
+                <default-field-of-view-deg>75</default-field-of-view-deg>
+            </config>
+        </view>
 
-		<view n="103">
-			<name>Engine Instruments</name>
-			<type>lookfrom</type>
-			<enabled type="bool">true</enabled>
-			<internal type="bool" archive="y">true</internal>
-			<config>
-				<from-model type="bool">true</from-model>
-				<x-offset-m archive="y">0.48</x-offset-m>
-				<y-offset-m archive="y">0.55</y-offset-m>
-				<z-offset-m archive="y">2.35</z-offset-m>
-				<default-field-of-view-deg type="double">50</default-field-of-view-deg>
-				<heading-offset-deg archive="y">15</heading-offset-deg>
-				<pitch-offset-deg archive="y">-35</pitch-offset-deg>
-				<roll-offset-deg archive="y">0</roll-offset-deg>
-			</config>
-		</view>
-	
-	</sim>
+        <view n="100">
+            <name>Fuel Selector</name>
+            <type>lookfrom</type>
+            <enabled type="bool">true</enabled>
+            <internal type="bool" archive="y">true</internal>
+            <config>
+                <from-model type="bool">true</from-model>
+                <x-offset-m archive="y">0.0</x-offset-m>
+                <y-offset-m archive="y">0.4</y-offset-m>
+                <z-offset-m archive="y">2.15</z-offset-m>
+                <default-field-of-view-deg type="double">84</default-field-of-view-deg>
+                <heading-offset-deg archive="y">0</heading-offset-deg>
+                <pitch-offset-deg archive="y">-80</pitch-offset-deg>
+                <roll-offset-deg archive="y">0</roll-offset-deg>
+            </config>
+        </view>
+
+        <view n="101">
+            <name>Lower Panel and Radio Stack</name>
+            <type>lookfrom</type>
+            <enabled type="bool">true</enabled>
+            <internal type="bool" archive="y">true</internal>
+            <config>
+                <from-model type="bool">true</from-model>
+                <x-offset-m archive="y">-0.2</x-offset-m>
+                <y-offset-m archive="y">0.08</y-offset-m>
+                <z-offset-m archive="y">2.30</z-offset-m>
+                <default-field-of-view-deg type="double">84</default-field-of-view-deg>
+                <heading-offset-deg archive="y">0</heading-offset-deg>
+                <pitch-offset-deg archive="y">0</pitch-offset-deg>
+                <roll-offset-deg archive="y">0</roll-offset-deg>
+            </config>
+        </view>
+
+        <view n="102">
+            <name>Navigation and GPS</name>
+            <type>lookfrom</type>
+            <enabled type="bool">true</enabled>
+            <internal type="bool" archive="y">true</internal>
+            <config>
+                <from-model type="bool">true</from-model>
+                <x-offset-m archive="y">0.0</x-offset-m>
+                <y-offset-m archive="y">0.38</y-offset-m>
+                <z-offset-m archive="y">2.30</z-offset-m>
+                <default-field-of-view-deg type="double">60</default-field-of-view-deg>
+                <heading-offset-deg archive="y">0</heading-offset-deg>
+                <pitch-offset-deg archive="y">0</pitch-offset-deg>
+                <roll-offset-deg archive="y">0</roll-offset-deg>
+            </config>
+        </view>
+
+        <view n="103">
+            <name>Engine Instruments</name>
+            <type>lookfrom</type>
+            <enabled type="bool">true</enabled>
+            <internal type="bool" archive="y">true</internal>
+            <config>
+                <from-model type="bool">true</from-model>
+                <x-offset-m archive="y">0.48</x-offset-m>
+                <y-offset-m archive="y">0.55</y-offset-m>
+                <z-offset-m archive="y">2.35</z-offset-m>
+                <default-field-of-view-deg type="double">50</default-field-of-view-deg>
+                <heading-offset-deg archive="y">15</heading-offset-deg>
+                <pitch-offset-deg archive="y">-35</pitch-offset-deg>
+                <roll-offset-deg archive="y">0</roll-offset-deg>
+            </config>
+        </view>
+
+    </sim>
 
     <input>
         <keyboard include="c170b-keyboard.xml"/>
     </input>
-	
+
     <fdm>
         <jsbsim>
             <propulsion>
@@ -327,11 +333,11 @@
             <fuel-selector type="int">0</fuel-selector>
         </fuel>
 
-		<switches>
+        <switches>
             <master-bat type="bool">false</master-bat>
             <master-alt type="bool">true</master-alt>
             <magnetos type="double">0</magnetos>
-		</switches>
+        </switches>
 
         <lighting>
             <landing-lights type="bool">true</landing-lights>
@@ -342,16 +348,16 @@
             <nav-lights-switch type="bool">false</nav-lights-switch>
         </lighting>
 
-		<circuit-breakers>
-			<fuel_ind type="bool">true</fuel_ind>
-			<beacon type="bool">true</beacon>
-			<strobe_lt type="bool">true</strobe_lt>
-			<landing_lt type="bool">true</landing_lt>
-			<flaps type="bool">true</flaps>
-			<instr_lt type="bool">true</instr_lt>
-			<nav_lt type="bool">true</nav_lt>
-			<radio1 type="bool">true</radio1>
-		</circuit-breakers>
+        <circuit-breakers>
+            <fuel_ind type="bool">true</fuel_ind>
+            <beacon type="bool">true</beacon>
+            <strobe_lt type="bool">true</strobe_lt>
+            <landing_lt type="bool">true</landing_lt>
+            <flaps type="bool">true</flaps>
+            <instr_lt type="bool">true</instr_lt>
+            <nav_lt type="bool">true</nav_lt>
+            <radio1 type="bool">true</radio1>
+        </circuit-breakers>
     </controls>
 
     <consumables>
@@ -377,37 +383,37 @@
     </consumables>
 
     <nasal>
-		<c170b>
+        <c170b>
             <file>Nasal/c170b.nas</file>
-			<file>Nasal/liveries.nas</file>
-			<file>Nasal/views.nas</file> 
+            <file>Nasal/liveries.nas</file>
+            <file>Nasal/views.nas</file>
             <file>Nasal/doors.nas</file>
-		</c170b>
+        </c170b>
 
         <electrical>
             <file>Nasal/electric_system.nas</file>
         </electrical>
 
-		<acconfig>
-			<file>Aircraft/c170b/AircraftConfig/acconfig.nas</file>
-		</acconfig>	
+        <acconfig>
+            <file>Aircraft/c170b/AircraftConfig/acconfig.nas</file>
+        </acconfig>
 
-		<garmin196>
-			<file>Aircraft/c170b/Models/panel/instruments/garmin196/garmin196.nas</file>
-		</garmin196>
-		
-		<light-manager>
-			<file>Nasal/light-manager.nas</file>
-		</light-manager>
-	
+        <garmin196>
+            <file>Aircraft/c170b/Models/panel/instruments/garmin196/garmin196.nas</file>
+        </garmin196>
+
+        <light-manager>
+            <file>Nasal/light-manager.nas</file>
+        </light-manager>
+
     </nasal>
-	
+
     <systems>
         <c170b>
-			<electrical>
-				<battery-status type="double">100.0</battery-status>
-			</electrical>
-		</c170b>
+            <electrical>
+                <battery-status type="double">100.0</battery-status>
+            </electrical>
+        </c170b>
     </systems>
 
     <instrumentation>
@@ -415,24 +421,24 @@
             <ident_status type="int">0</ident_status>
             <ident_light type="double">0.0</ident_light>
             <ident_light_status type="int">0</ident_light_status>           
-			<inputs>
+            <inputs>
                 <knob-mode type="int">0</knob-mode>
-			</inputs>
-		</transponder>
-		
-		<nav>
-			<power-btn type="int">0</power-btn>			
-		</nav>
+            </inputs>
+        </transponder>
 
-		<comm>
-			<power-btn type="int">0</power-btn>			
-		</comm>
+        <nav>
+            <power-btn type="int">0</power-btn>
+        </nav>
 
-		<garmin196>
-			<texture-file>Aircraft/c170b/Models/panel/instruments/garmin196/coque.png</texture-file>
-		</garmin196>
-		
-	</instrumentation>
-	
+        <comm>
+            <power-btn type="int">0</power-btn>
+        </comm>
+
+        <garmin196>
+            <texture-file>Aircraft/c170b/Models/panel/instruments/garmin196/coque.png</texture-file>
+        </garmin196>
+
+    </instrumentation>
+
 </PropertyList>
   

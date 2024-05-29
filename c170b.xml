@@ -228,7 +228,7 @@
 				<y>    0.0 </y>
 				<z>    0.0 </z>
 			</location>
-			<capacity unit="LBS">  0.01 </capacity>
+			<capacity unit="LBS">  0.10 </capacity>
 			<contents unit="LBS">  0.00 </contents>
 			<type>AVGAS</type>  
 			<priority>1</priority>
@@ -276,8 +276,8 @@
    <aerosurface_scale name="Elevator Control">
       <input>fcs/pitch-trim-sum</input>
       <range>
-        <min> -0.35 </min>
-        <max>  0.35 </max>
+        <min> -0.3 </min>
+        <max>  0.3 </max>
       </range>
       <output>fcs/elevator-pos-rad</output>
    </aerosurface_scale>
@@ -285,8 +285,8 @@
    <aerosurface_scale name="elevator normalization">
       <input>fcs/elevator-pos-rad</input>
       <domain>
-        <min> -0.35 </min>
-        <max>  0.35 </max>
+        <min> -0.3 </min>
+        <max>  0.3 </max>
       </domain>
       <range>
         <min> -1 </min>
@@ -311,8 +311,8 @@
    <aerosurface_scale name="Left Aileron Control">
       <input>fcs/roll-trim-sum</input>
       <range>
-        <min> -0.35 </min>
-        <max>  0.35 </max>
+        <min> -0.25 </min>
+        <max>  0.25 </max>
       </range>
       <output>fcs/left-aileron-pos-rad</output>
    </aerosurface_scale>
@@ -320,8 +320,8 @@
    <aerosurface_scale name="Right Aileron Control">
       <input>fcs/roll-trim-sum</input>
       <range>
-        <min> -0.35 </min>
-        <max>  0.35 </max>
+        <min> -0.25 </min>
+        <max>  0.25 </max>
       </range>
       <output>fcs/right-aileron-pos-rad</output>
    </aerosurface_scale>
@@ -329,8 +329,8 @@
    <aerosurface_scale name="left aileron normalization">
       <input>fcs/left-aileron-pos-rad</input>
       <domain>
-        <min> -0.35 </min>
-        <max>  0.35 </max>
+        <min> -0.25 </min>
+        <max>  0.25 </max>
       </domain>
       <range>
         <min> -1 </min>
@@ -342,8 +342,8 @@
    <aerosurface_scale name="right aileron normalization">
       <input>fcs/right-aileron-pos-rad</input>
       <domain>
-        <min> -0.35 </min>
-        <max>  0.35 </max>
+        <min> -0.25 </min>
+        <max>  0.25 </max>
       </domain>
       <range>
         <min> -1 </min>
@@ -368,8 +368,8 @@
    <aerosurface_scale name="Rudder Control">
       <input>fcs/rudder-command-sum</input>
       <range>
-        <min> -0.35 </min>
-        <max>  0.35 </max>
+        <min> -0.25 </min>
+        <max>  0.25 </max>
       </range>
       <output>fcs/rudder-pos-rad</output>
    </aerosurface_scale>
@@ -377,8 +377,8 @@
    <aerosurface_scale name="rudder normalization">
       <input>fcs/rudder-pos-rad</input>
       <domain>
-        <min> -0.35 </min>
-        <max>  0.35 </max>
+        <min> -0.25 </min>
+        <max>  0.25 </max>
       </domain>
       <range>
         <min> -1 </min>
@@ -417,19 +417,19 @@
                     </setting>
                     <setting>
                         <position>10</position>
-                        <time>0.5</time>
+                        <time>1.0</time>
                     </setting>
                     <setting>
                         <position>20</position>
-                        <time>0.5</time>
+                        <time>1.0</time>
                     </setting>
                     <setting>
                         <position>30</position>
-                        <time>0.5</time>
+                        <time>1.2</time>
                     </setting>
                     <setting>
                         <position>40</position>
-                        <time>0.5</time>
+                        <time>1.5</time>
                     </setting>
                 </traverse>
      <output>fcs/flap-pos-deg</output>
@@ -482,7 +482,7 @@
            <property>aero/qbar-psf</property>
            <property>metrics/Sw-sqft</property>
            <property>fcs/flap-pos-deg</property>
-           <value> 0.01333 </value>
+           <value> 0.00899 </value>
        </product>
     </function>
 
@@ -502,7 +502,7 @@
            <property>aero/qbar-psf</property>
            <property>metrics/Sw-sqft</property>
            <property>fcs/elevator-pos-rad</property>
-           <value>0.2</value>
+           <value>0.15</value>
        </product>
     </function>
 
@@ -561,7 +561,7 @@
            <property>aero/qbar-psf</property>
            <property>metrics/Sw-sqft</property>
            <property>fcs/flap-pos-deg</property>
-           <value> 0.00100 </value>
+           <value> 0.00300 </value>
          </product>
     </function>
 
@@ -571,7 +571,7 @@
            <property>aero/qbar-psf</property>
            <property>metrics/Sw-sqft</property>
            <property>fcs/speedbrake-pos-norm</property>
-           <value>0.028</value>
+           <value>0.048</value>
          </product>
     </function>
 
@@ -599,7 +599,7 @@
            <property>aero/qbar-psf</property>
            <property>metrics/Sw-sqft</property>
            <abs><property>fcs/elevator-pos-norm</property></abs>
-           <value>0.04</value>
+           <value>0.05</value>
        </product>
     </function>
 
@@ -628,7 +628,7 @@
            <property>metrics/Sw-sqft</property>
            <property>metrics/bw-ft</property>
            <property>aero/beta-rad</property>
-           <value>-0.1</value>
+           <value>-0.025</value>
        </product>
     </function>
 
@@ -640,7 +640,7 @@
            <property>metrics/bw-ft</property>
            <property>aero/bi2vel</property>
            <property>velocities/p-aero-rad_sec</property>
-           <value>-0.4</value>
+           <value>-0.6</value>
        </product>
     </function>
 
@@ -652,7 +652,7 @@
            <property>metrics/bw-ft</property>
            <property>aero/bi2vel</property>
            <property>velocities/r-aero-rad_sec</property>
-           <value>0.15</value>
+           <value>0.35</value>
        </product>
     </function>
 
@@ -663,7 +663,7 @@
           <property>metrics/Sw-sqft</property>
           <property>metrics/bw-ft</property>
           <property>fcs/left-aileron-pos-rad</property>
-          <value>0.17</value>
+          <value>0.27</value>
        </product>
     </function>
 
@@ -674,7 +674,7 @@
            <property>metrics/Sw-sqft</property>
            <property>metrics/bw-ft</property>
            <property>fcs/rudder-pos-rad</property>
-           <value>0.01</value>
+           <value>0.03</value>
        </product>
     </function>
 
@@ -718,7 +718,7 @@
            <property>metrics/cbarw-ft</property>
            <property>aero/ci2vel</property>
            <property>velocities/q-aero-rad_sec</property>
-           <value>-12</value>
+           <value>-19</value>
        </product>
     </function>
 
@@ -730,7 +730,7 @@
            <property>metrics/cbarw-ft</property>
            <property>aero/ci2vel</property>
            <property>aero/alphadot-rad_sec</property>
-           <value>-7</value>
+           <value>-10</value>
        </product>
     </function>
 
@@ -745,7 +745,7 @@
            <property>metrics/Sw-sqft</property>
            <property>metrics/bw-ft</property>
            <property>aero/beta-rad</property>
-           <value>0.12</value>
+           <value>0.32</value>
        </product>
     </function>
 
@@ -757,7 +757,7 @@
            <property>metrics/bw-ft</property>
            <property>aero/bi2vel</property>
            <property>velocities/r-aero-rad_sec</property>
-           <value>-0.15</value>
+           <value>-0.35</value>
        </product>
     </function>
 
@@ -768,7 +768,7 @@
            <property>metrics/Sw-sqft</property>
            <property>metrics/bw-ft</property>
            <property>fcs/rudder-pos-rad</property>
-           <value>-0.1</value>
+           <value>-0.3</value>
        </product>
     </function>
 
@@ -779,7 +779,7 @@
            <property>metrics/Sw-sqft</property>
            <property>metrics/bw-ft</property>
            <property>fcs/left-aileron-pos-rad</property>
-           <value>-0.01</value>
+           <value>-0.04</value>
        </product>
     </function>
 

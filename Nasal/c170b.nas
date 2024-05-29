@@ -18,6 +18,9 @@ var autostart = func (msg=1) {
     setprop("/fdm/jsbsim/propulsion/tank[1]/collector-valve", 1);
     setprop("/fdm/jsbsim/propulsion/tank[2]/collector-valve", 1);
 
+    # Remove pitot cover
+    setprop("/sim/model/c170b/pitot-cover", 0);
+
     # Setting levers and switches for startup
     setprop("/controls/switches/magnetos", 3);
     setprop("/controls/engines/engine/throttle", 0.2);
@@ -26,7 +29,7 @@ var autostart = func (msg=1) {
     setprop("/controls/switches/master-bat", 1);
     setprop("/controls/switches/master-alt", 1);
     setprop("/controls/fuel/fuel-selector", 3);
-	
+
     # Setting lights
     setprop("/controls/lighting/nav-lights-switch", 1);
     setprop("/controls/lighting/strobe-switch", 1);
@@ -113,7 +116,6 @@ var click = func (name, timeout=0.1, delay=0) {
     }, delay);
 };
 
-
 var flapsDown = func(step) {
     if(step == 0) return;
     if(props.globals.getNode("/sim/flaps") != nil) {
@@ -125,6 +127,8 @@ var flapsDown = func(step) {
     setprop("/controls/flight/flaps", val > 1 ? 1 : val < 0 ? 0 : val);
 }
 
+# Saved aircraft data is not reliable so save it here as well
+aircraft.data.add("/sim/model/c170b/pitot-cover");
 
 # ========== primer stuff ======================
 

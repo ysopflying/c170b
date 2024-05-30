@@ -61,7 +61,7 @@
   <type>rotate</type>
   <object-name>needle</object-name>
   <property alias="../../params/nav-heading-needle-deflection"/>
-  <factor>-3.2</factor>
+  <factor>3.2</factor>
   <center>
    <x-m>0.004503</x-m>
    <y-m>-0.0004</y-m>

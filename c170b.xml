@@ -66,9 +66,9 @@
  </metrics>
 
  <mass_balance>
-   <ixx unit="SLUG*FT2">       825 </ixx>
-   <iyy unit="SLUG*FT2">       717 </iyy>
-   <izz unit="SLUG*FT2">      1354 </izz>
+   <ixx unit="SLUG*FT2">       948 </ixx>
+   <iyy unit="SLUG*FT2">       1055 </iyy>
+   <izz unit="SLUG*FT2">      1600 </izz>
    <emptywt unit="LBS" >      1205 </emptywt>
    <location name="CG" unit="IN">
      <x> 116.00 </x>
@@ -515,16 +515,7 @@
        <product>
           <property>aero/qbar-psf</property>
           <property>metrics/Sw-sqft</property>
-          <table>
-            <independentVar lookup="row">aero/alpha-rad</independentVar>
-            <tableData>
-             -1.57    1.500
-             -0.26    0.042
-              0.00    0.036
-              0.26    0.042
-              1.57    1.500
-            </tableData>
-          </table>
+	   <value>0.029</value>
        </product>
     </function>
 
@@ -534,7 +525,7 @@
            <property>aero/qbar-psf</property>
            <property>metrics/Sw-sqft</property>
            <property>aero/cl-squared</property>
-           <value>0.04</value>
+           <value>0.054</value>
          </product>
     </function>
 

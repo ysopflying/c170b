@@ -54,6 +54,8 @@
             <c170b>
                 <mw_fairing type="bool">true</mw_fairing>
                 <pitot-cover type="bool">true</pitot-cover>
+				<sun_visor_l type="double">0.0</sun_visor_l>
+				<sun_visor_r type="double">0.0</sun_visor_r>
                  <!-- Event sounds -->
                 <sound>
                     <click-master-bat type="bool">false</click-master-bat>
@@ -106,6 +108,8 @@
 
         <menubar include="gui/dialogs/c170b-menu.xml"/>
 
+
+
         <!-- Splash screens. One is randomly chosen when FlightGear starts -->
         <previews>
             <preview>
@@ -123,6 +127,16 @@
                 <path>Previews/c170b-preview2.jpg</path>
                 <splash type="bool">true</splash>
             </preview>
+            <preview>
+                <type>interior</type>
+                <path>Previews/c170b-preview3.jpg</path>
+                <splash type="bool">true</splash>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <path>Previews/c170b-preview4.jpg</path>
+                <splash type="bool">true</splash>
+            </preview>			
         </previews>
 
         <systems>           
@@ -357,6 +371,7 @@
             <instr_lt type="bool">true</instr_lt>
             <nav_lt type="bool">true</nav_lt>
             <radio1 type="bool">true</radio1>
+            <autopilot type="bool">true</autopilot>
         </circuit-breakers>
     </controls>
 
@@ -388,6 +403,7 @@
             <file>Nasal/liveries.nas</file>
             <file>Nasal/views.nas</file>
             <file>Nasal/doors.nas</file>
+			<file>Nasal/af394a.nas</file> 
         </c170b>
 
         <electrical>

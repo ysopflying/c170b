@@ -220,11 +220,25 @@
         <object-name>Panel</object-name>
         <object-name>Panel_2</object-name>	
         <object-name>Panel_3</object-name>
+        <object-name>Seat_L</object-name>
+        <object-name>Seat_R</object-name>
+        <object-name>Rear_Seat</object-name>
         <property-base>sim/model/livery/</property-base>
         <texture-prop>texture2</texture-prop>
         <texture>c170b-2.png</texture>
     </animation>
 
+    <animation>
+        <type>material</type>
+        <object-name>Interior</object-name>
+        <object-name>door_R_int</object-name>
+        <object-name>door_L_int</object-name>
+        <object-name>Door_Latch_R</object-name>
+        <object-name>Door_Latch_L</object-name>
+        <property-base>sim/model/livery/</property-base>
+        <texture-prop>texture3</texture-prop>
+        <texture>c170b-3.png</texture>
+    </animation>
 
 	<animation>
 		<type>material</type>
@@ -295,9 +309,9 @@
 <model>
    <path>Aircraft/c170b/Models/Panel/Instruments/hi/hi.xml</path>
    <offsets>
-      <x-m>1.9356</x-m>
-      <y-m>-0.0709 </y-m>
-      <z-m>0.1654</z-m>m      
+      <x-m>1.9400 </x-m>
+      <y-m>-0.0699 </y-m>
+      <z-m>0.1654 </z-m>     
       <pitch-deg>-8</pitch-deg>
    </offsets>
 </model>
@@ -401,6 +415,17 @@
    </offsets>
 </model>
 
+<!-- OUTSIDE AIR TEMP -->
+<model>
+   <path>Aircraft/c170b/Models/Panel/Instruments/oat/oat.xml</path>
+   <offsets>
+      <x-m>2.2907</x-m>
+      <y-m>0.47081 </y-m>
+      <z-m>0.74319</z-m>
+      <heading-deg>-90</heading-deg>
+   </offsets>
+</model>
+
 <!-- Stall Warning -->
 <model>
    <path>Aircraft/c170b/Models/Panel/Instruments/stallwarn/stallwarn.xml</path>
@@ -443,6 +468,19 @@
    <scale>1.0</scale>
 </model>
 
+<!-- AF-394A -->
+<model>
+   <name>af394a</name>
+   <path>Aircraft/c170b/Models/Panel/Instruments/af-394a/af394a.xml</path>
+   <offsets>
+      <x-m>1.9620</x-m>
+      <y-m>0.163 </y-m>
+      <z-m>0.0540</z-m>
+	  <pitch-deg>-8</pitch-deg>
+   </offsets>
+   <scale>1.0</scale>
+
+</model>
 
 <!-- compass -->
 <model>
@@ -453,7 +491,7 @@
       <z-m>0.322</z-m>
       <pitch-deg>-8</pitch-deg>
    </offsets>
-</model>
+</model> 
 
 
 <!-- Garmin GPSMap 196 -->
@@ -1073,7 +1111,60 @@
         </hovered>
     </animation>
 
+<!--	Trim Wheel and pos indicator		-->
 
+    <animation>
+        <type>knob</type>
+        <object-name>elev_trim_wheel</object-name>
+        <property>controls/flight/elevator-trim</property>
+        <factor>-360</factor>
+        <drag-direction>vertical</drag-direction>
+        <axis>
+            <x>0.0</x>
+            <y>1.0</y>
+            <z>0.0</z>
+        </axis>
+        <center>
+            <x-m>2.03134</x-m>
+            <y-m>-0.0420473</y-m>
+            <z-m>-0.391028</z-m>
+        </center>
+        <action>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/flight/elevator-trim</property>
+                <factor>0.01</factor>
+                <min>-1</min>
+                <max>1</max>
+                <wrap>0</wrap>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <label>Elevator trim: %3f</label>
+                <tooltip-id>pitch-trim</tooltip-id>
+                <property>controls/flight/elevator-trim</property>
+            </binding>
+        </hovered>
+    </animation>
+ 
+ 	<animation>
+		<type>rotate</type>
+		<object-name>elev_trim_needle</object-name>
+		<property>controls/flight/elevator-trim</property>
+		<factor>-65</factor>
+		<axis>
+			<x>0.0</x>
+			<y>1.0</y>
+			<z>0.0</z>
+		</axis>
+		<center>
+			<x-m>2.0713</x-m>
+			<y-m>-0.02993</y-m>
+			<z-m>-0.4048</z-m>
+		</center>
+	</animation>
  
     <!-- Left Window -->
 
@@ -2124,6 +2215,75 @@
             </and>
         </condition>
     </animation>
+
+<!-- Sun Visors -->
+       
+    <animation>
+        <type>rotate</type>
+        <object-name>Sun_Visor_L</object-name>
+        <property>sim/model/c170b/sun_visor_l</property>
+        <factor>10.0</factor>
+        <center>
+            <x-m>2.3912</x-m>
+            <y-m>-0.34741</y-m>
+            <z-m>0.78474</z-m>
+        </center>
+        <axis>
+            <x>0.0</x>
+            <y>1.0</y>
+            <z>0.0</z>
+        </axis>
+    </animation>
+    <animation>
+        <type>slider</type>
+        <object-name>Sun_Visor_L</object-name>
+        <visible>true</visible>
+        <drag-direction>vertical</drag-direction>
+        <action>
+            <binding>
+                <command>property-adjust</command>
+                <property>sim/model/c170b/sun_visor_l</property>
+                <factor>-1</factor>
+                <min>0</min>
+                <max>11</max>
+                <wrap>0</wrap>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Sun_Visor_R</object-name>
+        <property>sim/model/c170b/sun_visor_r</property>
+        <factor>10.0</factor>
+        <center>
+            <x-m>2.39120</x-m>
+            <y-m>-0.34423</y-m>
+            <z-m>0.78474</z-m>
+        </center>
+        <axis>
+            <x>0.0</x>
+            <y>1.0</y>
+            <z>0.0</z>
+        </axis>
+    </animation>
+    <animation>
+        <type>slider</type>
+        <object-name>Sun_Visor_R</object-name>
+        <visible>true</visible>
+        <drag-direction>vertical</drag-direction>
+        <action>
+            <binding>
+                <command>property-adjust</command>
+                <property>sim/model/c170b/sun_visor_r</property>
+                <factor>-1</factor>
+                <min>0</min>
+                <max>11</max>
+                <wrap>0</wrap>
+            </binding>
+        </action>
+    </animation>
+
 
 <!-- Control Surfaces -->
 

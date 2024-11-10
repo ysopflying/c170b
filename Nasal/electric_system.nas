@@ -61,13 +61,10 @@ var electricsystem=func{
 		bus_load += battery_amps;
 	}
 
-    if ( power_source == "alternator" or power_source == "external") {
+    if ( ( power_source == "alternator" or power_source == "external" ) and ( battery_status < 100.0 ) ) {
 		new_battery_status = battery_status + 0.0001;
-		if ( new_battery_status > 100.0 ) {
-			new_battery_status = 100.0;
-		}
 	}
-	
+		
     # Comm-Nav
     if ( getprop("/controls/circuit-breakers/radio1") ) {
         setprop("/systems/c170b/electrical/outputs/comm[0]", bus_volts);
@@ -112,6 +109,13 @@ var electricsystem=func{
         setprop("/systems/c170b/electrical/outputs/instrument-lights", 0.0);
         setprop("/systems/c170b/electrical/outputs/cabin-lights", 0.0);
     }    
+
+    # Autopilot Power
+    if ( getprop("/controls/circuit-breakers/autopilot") ) {
+        setprop("/systems/c170b/electrical/outputs/autopilot", bus_volts);
+    } else {
+        setprop("/systems/c170b/electrical/outputs/autopilot", 0.0 );
+    }
 
     # Landing Light Power
     if ( getprop("/controls/circuit-breakers/landing_lt") ) {

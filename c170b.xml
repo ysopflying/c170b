@@ -79,9 +79,9 @@ check cg, Iyz
  </metrics>
 
  <mass_balance>
-   <ixx unit="SLUG*FT2">       825 </ixx>
-   <iyy unit="SLUG*FT2">       717 </iyy>
-   <izz unit="SLUG*FT2">      1354 </izz>
+   <ixx unit="SLUG*FT2">       948 </ixx>
+   <iyy unit="SLUG*FT2">       1055 </iyy>
+   <izz unit="SLUG*FT2">      1600 </izz>
    <emptywt unit="LBS" >      1205 </emptywt>
    <location name="CG" unit="IN">
      <x> 116.00 </x>

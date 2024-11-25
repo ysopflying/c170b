@@ -84,7 +84,7 @@ Iyz
    <izz unit="SLUG*FT2">      1600 </izz>
    <emptywt unit="LBS" >      1308 </emptywt>
    <location name="CG" unit="IN">
-     <x> 87.05 </x> <!-- 1308lbs@38.05inch, firewall assume 49inch from datum-->
+    <x> 91.55 </x> <!-- 1308lbs@38.05inch, firewall assumed 53.5inch from datum-->
      <y>   0.00 </y>
      <z>  -9.0 </z>
    </location>

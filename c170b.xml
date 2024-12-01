@@ -358,6 +358,7 @@
 
    <summer name="Rudder Command Sum">
       <input>fcs/rudder-cmd-norm</input>
+      <input>aero/tune/rudder-tap</input>
       <input>fcs/yaw-trim-cmd-norm</input>
       <clipto>
         <min> -1 </min>
@@ -456,6 +457,15 @@
  </flight_control>
 
  <aerodynamics>
+    <function name="aero/tune/wing-rig">
+       <description>tuning factor</description>
+           <value>0.0016</value>
+    </function> 
+
+   <function name="aero/tune/rudder-tap">
+       <description>fixed trim</description>
+           <value>-0.0009</value>
+    </function>
 
   <axis name="LIFT">
 

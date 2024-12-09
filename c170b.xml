@@ -885,7 +885,7 @@ Cy_r 0,21
        </product>
     </function>
 
-
+<!-- work in progress
     <function name="aero/moment/pitchdown_flap40sideslip">
        <description>Pitch moment due to elevator</description>
        <product>
@@ -896,7 +896,7 @@ Cy_r 0,21
           <value>-1</value>
        </product>
     </function>
-
+-->
 
 
 

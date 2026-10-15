@@ -17,6 +17,7 @@
   1.31 AeroPR to 25%MAC, CG corrected (reference to be checked), ground effect, custom rudder effectiveness
   1.30 Ysop edit Nov.2024
   - flight dynamics update reference: http://doc.gnu-darwin.org/cessna172/nonlinear.html (+CL changed)
+  1.4 Ysop edit 2026
 -->
 
 <!-- to do 
@@ -188,7 +189,7 @@ propeller
    <spring_coeff unit="LBS/FT">       800.00 </spring_coeff>
    <damping_coeff unit="LBS/FT/SEC">  90.00 </damping_coeff>
    <damping_coeff_rebound unit="LBS/FT/SEC">180</damping_coeff_rebound>
-   <max_steer unit="DEG"> 65.00 </max_steer>
+   <max_steer unit="DEG"> 45.00 </max_steer>
    <brake_group>NONE</brake_group>
    <retractable>0</retractable>
   </contact>
@@ -220,14 +221,13 @@ propeller
  </ground_reactions>
 
 	<propulsion>
-
-		<engine file="O-300-A">
+		<engine file="O-300-A"> 
 
 			<feed>0</feed>
-    
-			<thruster file="HZ-C2YR-1BF">
+    <!--			<thruster file="PronyBrake"> -->
+			<thruster file="HZ-C2YR-1BF"> 
 				<sense> 1 </sense>
- 				<p_factor> 59 </p_factor>
+ <p_factor> 59 </p_factor>
 				<location unit="IN">
 					<x>  13.00 </x>
 					<y>   0.00 </y>
@@ -277,58 +277,13 @@ propeller
 
 	</propulsion>
 
-	<system file="c170b-fuel"/>
-	<system file="c170b-electrical"/>
-	<system file="c170b-stallwarn"/>
-	<system file="c170b-engine"/>
+	<system file="fuel"/>
 
-	<flight_control name="FCS: c170b">
+ <flight_control name="FCS: c170b">
 
-        <channel name="Mixture">
-            <!-- If the engine was primed enough times and throttle
-                 is in starter position, then mixture is 1.
-				 (Taked from J3Cub logic)
-            -->
-            <fcs_function name="fcs/mixture-primer-cmd">
-                <function>
-                    <table>
-                        <independentVar lookup="row">/controls/engines/engine/primer</independentVar>
-                        <independentVar lookup="column">/controls/engines/engine/throttle</independentVar>
-                        <tableData>
-                                 0.09    0.1    0.5    0.51
-                            2    0       0      0      0
-                            3    0       1      1      0
-                            4    0       1      1      0
-                            5    0       1      1      0
-                            6    0       1      1      0
-                            7    0       0      0      0
-                        </tableData>
-                    </table>
-                </function>
-            </fcs_function>
+  <channel name="Pitch">
 
-            <pure_gain name="fcs/mixture-primer">
-                <input>fcs/mixture-cmd-norm</input>
-                <gain>fcs/mixture-primer-cmd</gain>
-            </pure_gain>
-
-            <!-- Primer logic -->
-            <switch name="Mixture Position">
-                <default value="fcs/mixture-cmd-norm"/>
-                <output>fcs/mixture-pos-norm</output>
-                <!-- Use primer if used and engine is cold. If engine
-                     is warm, then the mixture lever is used.
-                -->
-                <test logic="AND" value="fcs/mixture-primer">
-                    /controls/engines/engine/use-primer eq 1
-                    /engines/engine/oil-temperature-degf le 75
-                </test>
-            </switch>
-
-        </channel>
-
-	<channel name="Pitch">
-
+<!-- -->
             <kinematic name="fcs/elevator-cmd-norm-filtered">
                 <input>fcs/elevator-cmd-norm</input>
                 <traverse>
@@ -343,7 +298,7 @@ propeller
                 </traverse>
                 <output>/fcs/elevator-cmd-norm-filtered</output> <!--/sim/model/c172p/cockpit/yoke-elevator -->
             </kinematic>
-
+<!-- -->
    <summer name="Pitch Trim Sum">
       <input>fcs/elevator-cmd-norm-filtered</input>
       <input>fcs/pitch-trim-cmd-norm</input>
@@ -393,6 +348,8 @@ propeller
                 </traverse>
                 <output>/fcs/aileron-cmd-norm-filtered</output> <!--/sim/model/c172p/cockpit/yoke-elevator -->
             </kinematic>
+
+<!-- -->
 
    <summer name="Roll Trim Sum">
       <input>fcs/aileron-cmd-norm-filtered</input>
@@ -449,7 +406,8 @@ propeller
 
   </channel>
 
-	<channel name="Yaw">
+  <channel name="Yaw">
+<!-- -->
             <kinematic name="fcs/rudder-cmd-norm-filtered">
                 <input>fcs/rudder-cmd-norm</input>
                 <traverse>
@@ -464,6 +422,8 @@ propeller
                 </traverse>
                 <output>/fcs/rudder-cmd-norm-filtered</output> <!--/sim/model/c172p/cockpit/yoke-elevator -->
             </kinematic>
+<!-- -->
+
 
 
    <summer name="Rudder Command Sum">
@@ -516,7 +476,7 @@ propeller
 			<output>fcs/steer-cmd-norm</output>
 		</fcs_function>
 
-	</channel>
+  </channel>
 
   <channel name="Flaps">
    <kinematic name="Flaps Control">
@@ -572,7 +532,7 @@ propeller
 	<sum>
            <property>aero/force/Drag_elevator</property>
            <property>aero/force/Drag_basic</property>
-           <property>aero/force/Drag_induced</property>
+<!--           <property>aero/force/Drag_induced</property> -->
 	   <property>aero/force/Drag_flap</property>
 	   <property>aero/force/Drag_elevator</property>
 	</sum>
@@ -587,6 +547,106 @@ propeller
 	<value>1.176</value> <!-- scale up to 20deg -->
 	</product>
     </function>	
+
+<!-- ########################################################### -->
+
+    <function name="aero/function/checkalpha">
+       <description>local alpha1</description>
+	<atan>
+		<quotient>
+			<p>velocities/w-aero-fps</p>
+			<p>velocities/u-aero-fps</p>
+		</quotient>
+
+	</atan>
+    </function>	
+
+    <function name="aero/function/local alpha1right">
+       <description>local alpha1</description>
+	<atan>
+		<quotient>
+		<sum>
+			<p>velocities/w-aero-fps</p>
+			<product>
+			<p>velocities/p-aero-rad_sec</p>
+				<value>10</value>		<!--	l2 -->
+			</product>
+		</sum>
+		<sum>
+			<p>velocities/u-aero-fps</p>
+			<product>
+				<p>velocities/r-aero-rad_sec</p>
+				<value>8</value>		<!--	l1 -->
+			</product>
+		</sum>
+		</quotient>
+	</atan>
+    </function>	
+
+    <function name="aero/function/local betastab">
+       <description>local beta at stabilizer</description>
+
+	<sum>
+	<p>aero/beta-rad</p>
+	<atan>
+		<quotient>
+		<sum>
+			<p>velocities/v-aero-fps</p>
+			<product>
+			<p>velocities/r-aero-rad_sec</p>
+				<value>10</value>		<!--	l3 -->
+			</product>
+		</sum>
+			<p>velocities/u-aero-fps</p>
+		</quotient>
+	</atan>
+	</sum>
+    </function>	
+
+    <function name="aero/function/local alphastab">
+       <description>local alpha1</description>
+	<atan>
+		<quotient>
+		<sum>
+			<product>
+			<p>velocities/w-aero-fps</p>
+			<value>-1</value>
+			</product>
+			<product>
+			<p>velocities/q-aero-rad_sec</p>
+				<value>10</value>		<!--	l4 -->
+			</product>
+		</sum>
+		<sum>
+			<p>velocities/u-aero-fps</p>
+			<product>
+				<p>velocities/q-aero-rad_sec</p>
+				<value>10</value>		<!--	l4 -->
+			</product>
+		</sum>
+		</quotient>
+	</atan>
+    </function>	
+
+<!-- ########################################################### -->
+
+   <function name="aero/function/vel-propwash-fps">
+            <description> propeller induced velocity </description>
+            <sum>
+                <property>propulsion/engine/prop-induced-velocity_fps</property>
+<!--                <property>propulsion/engine[1]/prop-induced-velocity_fps</property> -->
+            </sum>
+        </function>
+
+        <function name="aero/function/qbar-propwash-psf">
+            <description> q bar due to the propeller induced velocity </description>
+            <product>
+                <property>aero/function/vel-propwash-fps</property>
+                <property>aero/function/vel-propwash-fps</property>
+                <property>atmosphere/rho-slugs_ft3</property>
+                <value>0.5</value>
+            </product>
+        </function>
 
         <function name="aero/function/pitchdown_flap"> <!-- sideslip with full flaps not allowed due to sudden pitch down moment. Values guesswork -->
             <description>trigger for neg Cmm with full flaps and sideslip</description>
@@ -712,22 +772,60 @@ propeller
 	  <property>aero/function/kCLge</property>
           <table>
             <independentVar lookup="row">aero/alpha-deg</independentVar>
+            <independentVar lookup="column">aero/beta-deg</independentVar>
             <tableData> 
-		-5	-0.285
-		0	0.165
-		10	1.065
-		12	1.131
-		13.75	1.36749
-		15	1.446
-		16	1.485
-		17.35	1.46378
-		18	1.39212
-		19	1.231
-		20	0.997
+          -25         -12.5       0           12.5        25
+-6        -0.2428266  -0.2378407  -0.2358141  -0.2378407  -0.2428266
+-3        -0.1544780  -0.1332766  -0.1239052  -0.1332766  -0.1544780
+0          0.0225320   0.0769064   0.0989387   0.0769064   0.0225320
+3          0.1978456   0.2884091   0.3247752   0.2884091   0.1978456
+6          0.3752795   0.5015272   0.5490990   0.5015272   0.3752795
+9          0.5590770   0.7144207   0.7722872   0.7144207   0.5590770
+12         0.7424703   0.9219723   0.9891622   0.9219723   0.7424703
+15         0.9160208   1.1054380   1.1688696   1.1054380   0.9160208
+18         1.0638867   1.2418535   1.2924444   1.2418535   1.0638867
+21         1.1344598   1.3008589   1.3386148   1.3008589   1.1344598
             </tableData>
           </table>
       </product>
     </function>
+
+    <function name="aero/force/Lift_correction">
+      <description>Lift correction to fit references</description>
+      <product>
+          <property>aero/qbar-psf</property>
+          <property>metrics/Sw-sqft</property>
+	  <property>aero/function/kCLge</property>
+          <table>
+            <independentVar lookup="row">aero/alpha-deg</independentVar>
+            <tableData> 
+
+-6  -0.1
+-3  -0.075
+0   0
+3   0.075
+6   0.1
+9   0.15
+12  0.2
+15  0.25
+18  0.32
+21 0
+            </tableData>
+          </table>
+      </product>
+    </function>
+
+
+
+
+
+
+
+
+
+
+
+
 
      <function name="aero/coefficient/CLq">
 	<description>Lift_due_to_pitch_rate</description>
@@ -736,7 +834,18 @@ propeller
        		<property>metrics/Sw-sqft</property>
        		<property>velocities/q-aero-rad_sec</property>
        		<property>aero/ci2vel</property>
-       		<value>3.9000</value>
+
+<!--            <table>
+            <independentVar lookup="row">aero/alpha-deg</independentVar>
+            <independentVar lookup="column">aero/beta-deg</independentVar>
+            <tableData> 
+später
+            </tableData>
+          </table>
+-->
+
+           <value>-8.2</value>
+      		
         </product>
       </function>
 
@@ -765,15 +874,33 @@ propeller
   <axis name="DRAG">
 
     <function name="aero/force/Drag_basic">
-       <description>Drag at zero lift</description>
+       <description>Drag at depending on alpha and beta</description>
        <product>
           <property>aero/qbar-psf</property>
           <property>metrics/Sw-sqft</property>
           <property>aero/function/kCDge</property>
-	  <value>0.029</value>
+
+          <table>
+            <independentVar lookup="row">aero/alpha-deg</independentVar>
+            <independentVar lookup="column">aero/beta-deg</independentVar>
+            <tableData> 
+          -25        -12.5      0          12.5       25
+-6        0.0377150  0.0376883  0.0376502  0.0376883  0.0377150
+-3        0.0354576  0.0353366  0.0353001  0.0353366  0.0354576
+0         0.0321115  0.0323086  0.0325383  0.0323086  0.0321115
+3         0.0323021  0.0343210  0.0353729  0.0343210  0.0323021
+6         0.0360909  0.0414606  0.0439271  0.0414606  0.0360909
+9         0.0438926  0.0537088  0.0580881  0.0537088  0.0438926
+12        0.0552778  0.0704727  0.0771360  0.0704727  0.0552778
+15        0.0693413  0.0889907  0.0963348  0.0889907  0.0693413
+18        0.0839567  0.1049415  0.1114617  0.1049415  0.0839567
+21        0.0914520  0.1124052  0.1175953  0.1124052  0.0914520
+            </tableData>
+          </table>
        </product>
     </function>
 
+<!-->
     <function name="aero/force/Drag_induced">
        <description>Induced drag</description>
          <product>
@@ -784,7 +911,7 @@ propeller
            <value>0.054</value>
          </product>
     </function>
-
+-->
     <function name="aero/force/Drag_flap">
        <description>Drag due to flaps</description>
          <product>
@@ -803,7 +930,7 @@ propeller
           </table>
          </product>
     </function>
-
+<!--
     <function name="aero/force/Drag_beta">
        <description>Drag due to sideslip</description>
        <product>
@@ -821,6 +948,7 @@ propeller
           </table>
        </product>
     </function>
+-->
 
     <function name="aero/force/Drag_elevator">
        <description>Drag due to Elevator Deflection</description>
@@ -828,7 +956,7 @@ propeller
            <property>aero/qbar-psf</property>
            <property>metrics/Sw-sqft</property>
            <abs><property>fcs/elevator-pos-norm</property></abs>
-           <value>0.06</value>
+           <value>0.002</value>
        </product>
     </function>
 
@@ -842,8 +970,23 @@ propeller
        <product>
            <property>aero/qbar-psf</property>
            <property>metrics/Sw-sqft</property>
-           <property>aero/beta-rad</property>
-           <value>-0.31</value>
+          <table>
+            <independentVar lookup="row">aero/alpha-deg</independentVar>
+            <independentVar lookup="column">aero/beta-deg</independentVar>
+            <tableData> 
+          -25        -12.5      0           12.5        25
+-6        0.0818051  0.0484631  -0.0006729  -0.0484631  -0.0818051
+-3        0.0833938  0.0493310  -0.0004542  -0.0493310  -0.0833938
+0         0.0851478  0.0506397  -0.0000477  -0.0506397  -0.0851478
+3         0.0834881  0.0504103   0.0004415  -0.0504103  -0.0834881
+6         0.0777509  0.0491549   0.0009211  -0.0491549  -0.0777509
+9         0.0716491  0.0465631   0.0014399  -0.0465631  -0.0716491
+12        0.0619723  0.0420525   0.0020119  -0.0420525  -0.0619723
+15        0.0483137  0.0344412   0.0025585  -0.0344412  -0.0483137
+18        0.0307019  0.0229455   0.0030870  -0.0229455  -0.0307019
+21        0.0207170  0.0165758   0.0033163  -0.0165758  -0.0207170
+            </tableData>
+          </table>
        </product>
     </function>
 <!-- cy_p -0,037
@@ -885,7 +1028,23 @@ Cy_r 0,21
            <property>metrics/Sw-sqft</property>
            <property>metrics/bw-ft</property>
            <property>aero/beta-rad</property>
-           <value>-0.089</value>
+          <table>
+            <independentVar lookup="row">aero/alpha-deg</independentVar>
+            <independentVar lookup="column">aero/beta-deg</independentVar>
+            <tableData> 
+          -25         -12.5       0           12.5        25
+-6        -0.0069831  -0.0162532   0.0003837   0.0162532   0.0069831
+-3        -0.0012966  -0.0120870   0.0003360   0.0120870   0.0012966
+0          0.0109814  -0.0028686   0.0002559   0.0028686  -0.0109814
+3          0.0220623   0.0076230   0.0001335  -0.0076230  -0.0220623
+6          0.0369943   0.0199551   0.0000236  -0.0199551  -0.0369943
+9          0.0602142   0.0329868  -0.0000877  -0.0329868  -0.0602142
+12         0.0854433   0.0452626  -0.0001590  -0.0452626  -0.0854433
+15         0.1065378   0.0538791  -0.0001102  -0.0538791  -0.1065378
+18         0.1173837   0.0578596   0.0001814  -0.0578596  -0.1173837
+21         0.1213609   0.0586166   0.0003680  -0.0586166  -0.1213609
+            </tableData>
+          </table>
        </product>
     </function>
 
@@ -897,7 +1056,25 @@ Cy_r 0,21
            <property>metrics/bw-ft</property>
            <property>aero/bi2vel</property>
            <property>velocities/p-aero-rad_sec</property>
-           <value>-0.47</value>
+          <table>
+            <independentVar lookup="row">aero/alpha-deg</independentVar>
+            <independentVar lookup="column">aero/beta-deg</independentVar>
+            <tableData> 
+                0           
+-6  -0.475
+-3  -0.477
+0   -0.477
+3   -0.486
+6   -0.492
+9   -0.503
+12  -0.475
+15  -0.378
+18  -0.233
+21  0.145
+            </tableData>
+          </table>
+
+
        </product>
     </function>
 
@@ -909,7 +1086,28 @@ Cy_r 0,21
            <property>metrics/bw-ft</property>
            <property>aero/bi2vel</property>
            <property>velocities/r-aero-rad_sec</property>
-           <value>0.098</value>
+          <table>
+            <independentVar lookup="row">aero/alpha-deg</independentVar>
+            <independentVar lookup="column">aero/beta-deg</independentVar>
+            <tableData> 
+	0
+-6	0.0330884
+-3	0.0440496
+0	0.0677542
+3	0.0902979
+6	0.1140118
+9	0.1375072
+12	0.1696207
+15	0.2142595
+18	0.2649132
+21	0.2918506
+
+            </tableData>
+          </table>
+
+
+
+
        </product>
     </function>
 
@@ -920,7 +1118,7 @@ Cy_r 0,21
           <property>metrics/Sw-sqft</property>
           <property>metrics/bw-ft</property>
           <property>aero/function/aileron-mean</property>
-          <value>0.178</value> 
+          <value>0.12</value> 
        </product>
     </function>
 
@@ -938,7 +1136,7 @@ Cy_r 0,21
   </axis>
 
   <axis name="PITCH">
-
+<!--  
     <function name="aero/moment/Pitch_alpha0">
        <description>Pitch moment at zero alpha</description>
        <product>
@@ -946,11 +1144,11 @@ Cy_r 0,21
            <property>metrics/Sw-sqft</property>
            <property>metrics/cbarw-ft</property>
            <value>0.035</value>
-<!--           <value>-0.015</value> -->
+         <value>-0.015</value> 
        </product>
     </function>
 
-
+-->
 
     <function name="aero/moment/Pitch_alpha">
        <description>Pitch moment due to alpha</description>
@@ -959,7 +1157,27 @@ Cy_r 0,21
            <property>metrics/Sw-sqft</property>
            <property>metrics/cbarw-ft</property>
            <property>aero/alpha-rad</property>
-           <value>-1.52</value> <!-- existing 0.89 -->
+          <table>
+            <independentVar lookup="row">aero/alpha-deg</independentVar>
+            <independentVar lookup="column">aero/beta-deg</independentVar>
+            <tableData> 
+          -25         -12.5       0           12.5        25
+-6         0.0945921   0.1598768   0.2052432   0.1598768   0.0945921
+-3         0.0866109   0.1454899   0.1841835   0.1454899   0.0866109
+0          0.0688640   0.1130221   0.1434963   0.1130221   0.0688640
+3          0.0543871   0.0756587   0.0902165   0.0756587   0.0543871
+6          0.0322648   0.0307552   0.0380766   0.0307552   0.0322648
+9         -0.0078654  -0.0179849  -0.0152187  -0.0179849  -0.0078654
+12        -0.0553595  -0.0697331  -0.0678376  -0.0697331  -0.0553595
+15        -0.1028821  -0.1190854  -0.1128507  -0.1190854  -0.1028821
+18        -0.1373027  -0.1590142  -0.1482344  -0.1590142  -0.1373027
+21        -0.1542475  -0.1771083  -0.1625560  -0.1771083  -0.1542475
+            </tableData>
+          </table>
+
+
+
+
        </product>
     </function>
 
@@ -970,7 +1188,26 @@ Cy_r 0,21
           <property>metrics/Sw-sqft</property>
           <property>metrics/cbarw-ft</property>
           <property>fcs/elevator-pos-rad</property>
-          <value>-1.28</value>
+            <value>0.8</value>
+          <table>
+            <independentVar lookup="row">aero/alpha-deg</independentVar>
+            <independentVar lookup="column">aero/beta-deg</independentVar>
+            <tableData> 
+
+          -25         -12.5       0           12.5        25
+-6        -0.8998512  -0.9982517  -1.0564230  -0.9950853  -0.8948560
+-3        -0.9214628  -1.0628241  -1.1791001  -1.0601521  -0.9163239
+0         -0.9689149  -1.2332984  -1.1593931  -1.2312655  -0.9637651
+3         -1.0538112  -1.2815332  -1.4237427  -1.2800779  -1.0490939
+6         -1.4031194  -1.2853114  -1.4216184  -1.2845958  -1.3948104
+9         -1.5308394  -1.2941384  -1.4191100  -1.2938614  -1.5271487
+12        -1.5058358  -1.2995293  -1.4095529  -1.2998598  -1.5035881
+15        -1.1969390  -1.6562625  -1.4020123  -1.6562238  -1.2028494
+18        -1.0907723  -1.5989251  -1.3368470  -1.5992357  -1.0950695
+21        -1.0749310  -1.7202944  -1.3080692  -1.7203533  -1.0811357
+            </tableData>
+          </table>
+
        </product>
     </function>
 
@@ -982,7 +1219,26 @@ Cy_r 0,21
            <property>metrics/cbarw-ft</property>
            <property>aero/ci2vel</property>
            <property>velocities/q-aero-rad_sec</property>
-           <value>-12.4</value>
+          <table>
+            <independentVar lookup="row">aero/alpha-deg</independentVar>
+            <independentVar lookup="column">aero/beta-deg</independentVar>
+            <tableData> 
+          -25          -12.5        0            12.5         25
+-6         -3.3300252  -11.5707201   -3.8649423  -11.5056671   -3.2587410
+-3         -5.0065517  -11.2729444   -6.6701261  -11.2215287   -4.9368285
+0          -5.8902915  -10.4592246   -7.2919586  -10.4281319   -5.8389412
+3          -8.1555746  -10.9671894  -12.0440387  -10.9423735   -8.0813815
+6          -8.6315173  -11.0411458  -12.4407125  -11.0182193   -8.5259759
+9          -9.8886339  -11.9740101  -13.1518644  -11.9656497   -9.7407800
+12        -10.3108000  -12.2259624  -13.3822036  -12.2780905  -10.2419590
+15        -10.3479789  -15.1806559  -13.3680382  -15.2523596  -10.4170936
+18         -9.9888535  -14.0945634  -13.0938246  -14.1951067  -10.1766035
+21         -9.7727606  -15.2092847  -13.0073375  -15.2750052  -10.0028911
+            </tableData>
+          </table>
+
+
+
        </product>
     </function>
 
@@ -998,7 +1254,7 @@ Cy_r 0,21
        </product>
     </function>
 
-
+<!-- 
     <function name="aero/moment/pitchdown_flap40sideslip">
        <description>Pitch moment due to elevator</description>
        <product>
@@ -1006,10 +1262,29 @@ Cy_r 0,21
           <property>metrics/Sw-sqft</property>
           <property>metrics/cbarw-ft</property>
           <property>aero/function/pitchdown_flap</property>
-          <value>-1</value>
+
+          <table>
+            <independentVar lookup="row">aero/alpha-deg</independentVar>
+            <independentVar lookup="column">aero/beta-deg</independentVar>
+            <tableData> 
+
+
+          -25         -12.5       0           12.5        25
+-6        -0.8870800  -0.6288751  -2.2963386  -0.6274249  -0.8826215
+-3        -0.8850186  -0.7939698  -2.0043759  -0.7924892  -0.8803814
+0         -0.9120848  -1.1481253  -1.3573681  -1.1466020  -0.9070340
+3         -0.9676175  -1.2434332  -1.4229030  -1.2422162  -0.9625129
+6         -1.0372126  -1.3146562  -1.4236533  -1.3137578  -1.0321777
+9         -1.1372656  -1.3292413  -1.4211955  -1.3287469  -1.1338595
+12        -1.1445839  -1.3241954  -1.4133522  -1.3244626  -1.1430751
+15        -1.2116820  -1.2967537  -2.4760620  -1.2974428  -1.2126118
+18        -1.0977043  -1.2352041  -2.3712329  -1.2359542  -1.0988864
+21        -1.1087906  -1.1915722  -2.8561705  -1.1920594  -1.1101559
+            </tableData>
+          </table>
        </product>
     </function>
-
+-->
 
 
 
@@ -1023,8 +1298,27 @@ Cy_r 0,21
            <property>aero/qbar-psf</property>
            <property>metrics/Sw-sqft</property>
            <property>metrics/bw-ft</property>
-           <property>aero/beta-rad</property>
-           <value>0.065</value>
+          <table>
+            <independentVar lookup="row">aero/alpha-deg</independentVar>
+            <independentVar lookup="column">aero/beta-deg</independentVar>
+            <tableData> 
+          -25         -12.5       0           12.5       25
+-6        -0.0224744  -0.0144256   0.0007776  0.0144256  0.0224744
+-3        -0.0213848  -0.0135624   0.0005644  0.0135624  0.0213848
+0         -0.0190860  -0.0119952   0.0002012  0.0119952  0.0190860
+3         -0.0174812  -0.0110712  -0.0001099  0.0110712  0.0174812
+6         -0.0165201  -0.0108332  -0.0002940  0.0108332  0.0165201
+9         -0.0171872  -0.0112214  -0.0003937  0.0112214  0.0171872
+12        -0.0184926  -0.0121893  -0.0004029  0.0121893  0.0184926
+15        -0.0201320  -0.0133553  -0.0003207  0.0133553  0.0201320
+18        -0.0223194  -0.0137502  -0.0002111  0.0137502  0.0223194
+21        -0.0233589  -0.0139167  -0.0001397  0.0139167  0.0233589
+            </tableData>
+          </table>
+
+
+
+
        </product>
     </function>
 
@@ -1036,7 +1330,26 @@ Cy_r 0,21
            <property>metrics/bw-ft</property>
            <property>aero/bi2vel</property>
            <property>velocities/r-aero-rad_sec</property>
-           <value>-0.099</value>
+          <table>
+            <independentVar lookup="row">aero/alpha-deg</independentVar>
+            <independentVar lookup="column">aero/beta-deg</independentVar>
+            <tableData> 
+          -25         -12.5       0           12.5        25
+-6        -0.0095018  -0.0247222  -0.0786017  -0.0247222  -0.0095018
+-3        -0.0035964  -0.0374833  -0.0781265  -0.0374833  -0.0035964
+0         -0.0038966  -0.0441701  -0.0793418  -0.0441701  -0.0038966
+3         -0.0012678  -0.0528154  -0.0846025  -0.0528154  -0.0012678
+6         -0.0040547  -0.0601754  -0.0943941  -0.0601754  -0.0040547
+9         -0.0209578  -0.0810908  -0.1054673  -0.0810908  -0.0209578
+12        -0.0579864  -0.0913623  -0.1195604  -0.0913623  -0.0579864
+15        -0.0851007  -0.1099095  -0.1389818  -0.1099095  -0.0851007
+18        -0.0929609  -0.1328034  -0.1516286  -0.1328034  -0.0929609
+21        -0.0826700  -0.1486612  -0.1597424  -0.1486612  -0.0826700
+            </tableData>
+          </table>
+
+
+
        </product>
     </function>
 
@@ -1049,7 +1362,27 @@ Cy_r 0,21
                     <property>metrics/bw-ft</property>
                     <property>aero/bi2vel</property>
                     <property>velocities/p-aero-rad_sec</property>
-           	<value>-0.03</value>
+          <table>
+            <independentVar lookup="row">aero/alpha-deg</independentVar>
+            <independentVar lookup="column">aero/beta-deg</independentVar>
+            <tableData> 
+          -25         -12.5       0           12.5        25
+-6         0.0230923   0.0060765   0.0131319   0.0060765   0.0230923
+-3         0.0121084   0.0017156   0.0023239   0.0017156   0.0121084
+0         -0.0047577  -0.0116888  -0.0119281  -0.0116888  -0.0047577
+3         -0.0303768  -0.0257037  -0.0308925  -0.0257037  -0.0303768
+6         -0.0410223  -0.0391322  -0.0412678  -0.0391322  -0.0410223
+9         -0.0524594  -0.0487875  -0.0487229  -0.0487875  -0.0524594
+12        -0.0290819  -0.0494795  -0.0535658  -0.0494795  -0.0290819
+15        -0.0219671  -0.0544735  -0.0590345  -0.0544735  -0.0219671
+18        -0.0057759  -0.0530825  -0.0609512  -0.0530825  -0.0057759
+21        -0.0110998  -0.0579645  -0.0633850  -0.0579645  -0.0110998
+            </tableData>
+          </table>
+
+
+
+
                 </product>
             </function>
 
@@ -1060,7 +1393,7 @@ Cy_r 0,21
            <property>metrics/Sw-sqft</property>
            <property>metrics/bw-ft</property>
            <property>fcs/rudder-pos-rad</property>
-           <value>-0.076</value>
+           <value>-0.07</value>
        </product>
     </function>
 
@@ -1070,10 +1403,24 @@ Cy_r 0,21
            <property>aero/qbar-psf</property>
            <property>metrics/Sw-sqft</property>
            <property>metrics/bw-ft</property>
-           <property>fcs/left-aileron-pos-rad</property>
-           <value>-0.016</value>
+           <property>aero/function/aileron-mean</property>
+           <value>-0.003</value>
        </product>
     </function>
+
+<function name="aero/moment/Cn_prop">		
+<description>Yaw_moment_due_to_spiraling_propwash</description>			
+<product>			
+<property>aero/function/qbar-propwash-psf</property>			
+<property>metrics/Sw-sqft</property>			
+<property>metrics/bw-ft</property>			
+<value>	-0.00337		</value>
+			
+</product>			
+</function>			
+
+
+
 
   </axis>
 
